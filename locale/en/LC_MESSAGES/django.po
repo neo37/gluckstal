@@ -1,0 +1,1358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-25 21:24+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: gluckstal/urls.py:11
+msgid "GLÜCKSTAL — управление сайтом"
+msgstr "GLÜCKSTAL — site management"
+
+#: gluckstal/urls.py:13
+msgid "Контент и настройки"
+msgstr "Content and settings"
+
+#: shop/admin.py:106 shop/admin.py:121
+msgid "Сначала сохраните токен бота"
+msgstr "Save the bot token first"
+
+#: shop/admin.py:127
+#, python-format
+msgid "Бот @%s работает, но не сохранён ни один ID чата"
+msgstr "Bot @%s works, but no chat ID is saved yet"
+
+#: shop/admin.py:128
+#, python-format
+msgid "✅ Тестовое сообщение из админки сайта %s. Заявки будут приходить сюда."
+msgstr "✅ Test message from the %s site admin. Orders will arrive here."
+
+#: shop/admin.py:138
+msgid "Выберите файл резервной копии (.zip или .sqlite3)"
+msgstr "Choose a backup file (.zip or .sqlite3)"
+
+#: shop/admin.py:140
+msgid "Подтвердите замену данных галочкой"
+msgstr "Tick the checkbox to confirm replacing the data"
+
+#: shop/admin.py:145
+#, python-format
+msgid "Импорт не выполнен: %s"
+msgstr "Import failed: %s"
+
+#: shop/admin.py:147
+msgid "База сайта восстановлена вместе с фото."
+msgstr "The site database has been restored together with photos."
+
+#: shop/admin.py:148
+msgid "База сайта восстановлена (фото не менялись)."
+msgstr "The site database has been restored (photos unchanged)."
+
+#: shop/admin.py:149
+#, python-format
+msgid "Предыдущее состояние сохранено: %s. Войдите заново, если попросит."
+msgstr "The previous state was saved as %s. Log in again if asked."
+
+#: shop/admin.py:151 shop/templates/admin/shop/backup.html:3
+msgid "Резервная копия сайта"
+msgstr "Site backup"
+
+#: shop/admin.py:350
+msgid "Вход через Telegram не удался: подпись неверна или устарела."
+msgstr "Telegram login failed: the signature is invalid or expired."
+
+#: shop/admin.py:354
+msgid ""
+"Этот Telegram-аккаунт не привязан к администратору. Войдите по паролю и "
+"привяжите его на главной странице админки."
+msgstr ""
+"This Telegram account is not linked to an administrator. Log in with your "
+"password and link it on the admin home page."
+
+#: shop/admin.py:371
+msgid "Не удалось привязать Telegram: подпись неверна или устарела."
+msgstr "Could not link Telegram: the signature is invalid or expired."
+
+#: shop/admin.py:375
+#, python-format
+msgid "Этот Telegram уже привязан к пользователю %s."
+msgstr "This Telegram account is already linked to user %s."
+
+#: shop/admin.py:379
+msgid ""
+"Telegram привязан: теперь можно входить в админку кнопкой «Войти через "
+"Telegram»."
+msgstr ""
+"Telegram linked: you can now log in to the admin with the “Log in with "
+"Telegram” button."
+
+#: shop/admin.py:387
+msgid "Telegram отвязан."
+msgstr "Telegram unlinked."
+
+#: shop/backup.py:65
+#, python-format
+msgid "это не база SQLite: %s"
+msgstr "this is not an SQLite database: %s"
+
+#: shop/backup.py:67
+#, python-format
+msgid "база повреждена: %s"
+msgstr "the database is corrupted: %s"
+
+#: shop/backup.py:70
+#, python-format
+msgid "это не база этого сайта (нет таблиц: %s)"
+msgstr "this is not a database of this site (missing tables: %s)"
+
+#: shop/backup.py:90
+msgid "в архиве нет db.sqlite3"
+msgstr "the archive has no db.sqlite3"
+
+#: shop/backup.py:92
+msgid "архив слишком большой"
+msgstr "the archive is too large"
+
+#: shop/backup.py:96
+#, python-format
+msgid "недопустимый путь в архиве: %s"
+msgstr "forbidden path in the archive: %s"
+
+#: shop/models.py:12
+msgid "Телефон: 10–15 цифр, с кодом страны"
+msgstr "Phone: 10–15 digits, with the country code"
+
+#: shop/models.py:13
+msgid ""
+"Английская версия. Если пусто — на английской странице показывается русский "
+"текст."
+msgstr "English version. If empty, the English page shows the Russian text."
+
+#: shop/models.py:40
+msgid "Название бренда"
+msgstr "Brand name"
+
+#: shop/models.py:41
+msgid "Имя мастера"
+msgstr "Maker's name"
+
+#: shop/models.py:43
+msgid "Город"
+msgstr "City"
+
+#: shop/models.py:45
+msgid "Телефон"
+msgstr "Phone"
+
+#: shop/models.py:46
+msgid "E-mail"
+msgstr "E-mail"
+
+#: shop/models.py:47
+msgid "Telegram (ник без @)"
+msgstr "Telegram (username without @)"
+
+#: shop/models.py:48
+msgid "Только ник, без @ и ссылки"
+msgstr "Username only, without @ or a link"
+
+#: shop/models.py:49
+msgid "Ссылка на VK"
+msgstr "VK link"
+
+#: shop/models.py:50
+msgid "WhatsApp (номер)"
+msgstr "WhatsApp (number)"
+
+#: shop/models.py:51
+msgid "Если заполнено — на сайте появится кнопка WhatsApp"
+msgstr "If filled in, a WhatsApp button appears on the site"
+
+#: shop/models.py:52
+msgid "Ссылка на старый сайт"
+msgstr "Old website link"
+
+#: shop/models.py:52
+msgid "Показывается в подвале"
+msgstr "Shown in the footer"
+
+#: shop/models.py:55
+msgid "Адрес сайта"
+msgstr "Site URL"
+
+#: shop/models.py:56
+msgid "Для canonical, sitemap и превью ссылок"
+msgstr "Used for canonical, sitemap and link previews"
+
+#: shop/models.py:57
+msgid "Заголовок вкладки / для поиска (title)"
+msgstr "Browser tab / search title"
+
+#: shop/models.py:59
+msgid "Описание для поиска (description)"
+msgstr "Search description"
+
+#: shop/models.py:61
+msgid "Надзаголовок"
+msgstr "Eyebrow"
+
+#: shop/models.py:63
+msgid "Главный заголовок"
+msgstr "Main heading"
+
+#: shop/models.py:65
+msgid "Подзаголовок"
+msgstr "Subheading"
+
+#: shop/models.py:67
+msgid "Главное фото"
+msgstr "Main photo"
+
+#: shop/models.py:68
+msgid "Логотип (круглый, PNG с прозрачностью)"
+msgstr "Logo (round, PNG with transparency)"
+
+#: shop/models.py:71
+msgid "Заголовок «Обо мне»"
+msgstr "“About me” heading"
+
+#: shop/models.py:73
+msgid "Текст «Обо мне»"
+msgstr "“About me” text"
+
+#: shop/models.py:74
+msgid "Абзацы — через пустую строку. **Жирный** — двумя звёздочками."
+msgstr ""
+"Separate paragraphs with a blank line. **Bold** — with double asterisks."
+
+#: shop/models.py:76
+msgid "Фото мастера"
+msgstr "Maker's photo"
+
+#: shop/models.py:77
+msgid "Фото мастерской"
+msgstr "Workshop photo"
+
+#: shop/models.py:80
+msgid "Заголовок блока «Своя модель»"
+msgstr "“Custom design” block heading"
+
+#: shop/models.py:82
+msgid "Текст блока «Своя модель»"
+msgstr "“Custom design” block text"
+
+#: shop/models.py:84
+msgid "Фото блока «Своя модель»"
+msgstr "“Custom design” block photo"
+
+#: shop/models.py:87
+msgid "Номер счётчика Яндекс.Метрики"
+msgstr "Yandex Metrica counter ID"
+
+#: shop/models.py:88
+msgid "Только цифры"
+msgstr "Digits only"
+
+#: shop/models.py:89
+msgid "Токен Telegram-бота"
+msgstr "Telegram bot token"
+
+#: shop/models.py:90
+msgid "Формат 123456789:AA…"
+msgstr "Format 123456789:AA…"
+
+#: shop/models.py:91
+msgid "ID чатов для заявок"
+msgstr "Chat IDs for orders"
+
+#: shop/models.py:93
+msgid "Номера через запятую"
+msgstr "IDs separated by commas"
+
+#: shop/models.py:94
+msgid ""
+"Кому бот присылает заявки. Проще всего — кнопкой «Найти чаты» вверху "
+"страницы."
+msgstr ""
+"Who receives orders from the bot. The easiest way is the “Find chats” button"
+" at the top of the page."
+
+#: shop/models.py:95
+msgid "Username бота (без @)"
+msgstr "Bot username (without @)"
+
+#: shop/models.py:96
+msgid ""
+"Нужен для входа в админку через Telegram. Заполняется сам при «Найти чаты»."
+msgstr ""
+"Needed for logging in to the admin with Telegram. Filled in automatically by"
+" “Find chats”."
+
+#: shop/models.py:97
+msgid "Адрес Telegram Bot API"
+msgstr "Telegram Bot API URL"
+
+#: shop/models.py:98
+msgid ""
+"Пусто — https://api.telegram.org. Укажите адрес ретранслятора, если сервер "
+"не может напрямую связаться с Telegram."
+msgstr ""
+"Empty — https://api.telegram.org. Set a relay URL if the server cannot reach"
+" Telegram directly."
+
+#: shop/models.py:102 shop/models.py:105
+msgid "Настройки сайта"
+msgstr "Site settings"
+
+#: shop/models.py:136 shop/models.py:150
+msgid "Название"
+msgstr "Name"
+
+#: shop/models.py:138
+msgid "Код (латиницей)"
+msgstr "Code (Latin letters)"
+
+#: shop/models.py:139 shop/models.py:162 shop/models.py:178 shop/models.py:202
+#: shop/models.py:224 shop/models.py:240
+msgid "Порядок"
+msgstr "Order"
+
+#: shop/models.py:142 shop/models.py:154
+msgid "Категория"
+msgstr "Category"
+
+#: shop/models.py:142
+msgid "Категории"
+msgstr "Categories"
+
+#: shop/models.py:152
+msgid "Код для ссылки (латиницей)"
+msgstr "Link code (Latin letters)"
+
+#: shop/models.py:153
+msgid "Ссылка на товар будет вида /#p=код"
+msgstr "The product link will look like /#p=code"
+
+#: shop/models.py:155
+msgid "Цена, ₽"
+msgstr "Price, ₽"
+
+#: shop/models.py:156
+msgid "Цена «от»"
+msgstr "“From” price"
+
+#: shop/models.py:157
+msgid "Описание"
+msgstr "Description"
+
+#: shop/models.py:157
+msgid "Каждый пункт — с новой строки. Первый пункт виден в карточке."
+msgstr "One point per line. The first point is shown on the card."
+
+#: shop/models.py:159
+msgid "Подарок мужчине"
+msgstr "Gift for him"
+
+#: shop/models.py:160
+msgid "Подарок женщине"
+msgstr "Gift for her"
+
+#: shop/models.py:161 shop/models.py:201 shop/models.py:239
+msgid "Показывать"
+msgstr "Visible"
+
+#: shop/models.py:165
+msgid "Товар"
+msgstr "Product"
+
+#: shop/models.py:165 shop/templates/admin/gl_index.html:34
+msgid "Товары"
+msgstr "Products"
+
+#: shop/models.py:177 shop/models.py:181 shop/models.py:199 shop/views.py:86
+msgid "Фото"
+msgstr "Photo"
+
+#: shop/models.py:193
+msgid "Имя автора"
+msgstr "Author's name"
+
+#: shop/models.py:195 shop/models.py:257 shop/templates/shop/index.html:213
+msgid "Изделие"
+msgstr "Product"
+
+#: shop/models.py:197
+msgid "Текст отзыва"
+msgstr "Review text"
+
+#: shop/models.py:200
+msgid "Ссылка на оригинал"
+msgstr "Link to the original"
+
+#: shop/models.py:205
+msgid "Отзыв"
+msgstr "Review"
+
+#: shop/models.py:205 shop/templates/admin/gl_index.html:35
+#: shop/templates/shop/index.html:173
+msgid "Отзывы"
+msgstr "Reviews"
+
+#: shop/models.py:218
+msgid "Преимущество (тёмная полоса)"
+msgstr "Benefit (dark strip)"
+
+#: shop/models.py:218
+msgid "Шаг «Как заказать»"
+msgstr "“How to order” step"
+
+#: shop/models.py:219
+msgid "Блок"
+msgstr "Block"
+
+#: shop/models.py:220
+msgid "Заголовок"
+msgstr "Heading"
+
+#: shop/models.py:222
+msgid "Текст"
+msgstr "Text"
+
+#: shop/models.py:227
+msgid "Карточка блока"
+msgstr "Block card"
+
+#: shop/models.py:227
+msgid "Преимущества и шаги заказа"
+msgstr "Benefits and ordering steps"
+
+#: shop/models.py:235 shop/models.py:243
+msgid "Вопрос"
+msgstr "Question"
+
+#: shop/models.py:237
+msgid "Ответ"
+msgstr "Answer"
+
+#: shop/models.py:243 shop/templates/shop/index.html:184
+msgid "Частые вопросы"
+msgstr "FAQ"
+
+#: shop/models.py:251
+msgid "Новая"
+msgstr "New"
+
+#: shop/models.py:251
+msgid "В работе"
+msgstr "In progress"
+
+#: shop/models.py:251
+msgid "Выполнена"
+msgstr "Done"
+
+#: shop/models.py:251
+msgid "Отменена"
+msgstr "Cancelled"
+
+#: shop/models.py:252
+msgid "Отправлена в Telegram"
+msgstr "Sent to Telegram"
+
+#: shop/models.py:252 shop/models.py:265
+msgid "Ошибка Telegram"
+msgstr "Telegram error"
+
+#: shop/models.py:252
+msgid "Бот не настроен"
+msgstr "Bot not configured"
+
+#: shop/models.py:253
+msgid "Создана"
+msgstr "Created"
+
+#: shop/models.py:254
+msgid "Имя"
+msgstr "Name"
+
+#: shop/models.py:255
+msgid "Контакт"
+msgstr "Contact"
+
+#: shop/models.py:256
+msgid "Связаться через"
+msgstr "Contact via"
+
+#: shop/models.py:258 shop/templates/shop/index.html:221
+msgid "Пожелания"
+msgstr "Wishes"
+
+#: shop/models.py:259
+msgid "Язык сайта"
+msgstr "Site language"
+
+#: shop/models.py:260 shop/models.py:283
+msgid "IP"
+msgstr "IP"
+
+#: shop/models.py:261 shop/models.py:297
+msgid "Визит"
+msgstr "Visit"
+
+#: shop/models.py:263
+msgid "Статус"
+msgstr "Status"
+
+#: shop/models.py:264
+msgid "Telegram"
+msgstr "Telegram"
+
+#: shop/models.py:266
+msgid "Заметка"
+msgstr "Note"
+
+#: shop/models.py:269
+msgid "Заявка"
+msgstr "Order"
+
+#: shop/models.py:269 shop/templates/admin/gl_index.html:32
+msgid "Заявки"
+msgstr "Orders"
+
+#: shop/models.py:279
+msgid "Посетитель"
+msgstr "Visitor"
+
+#: shop/models.py:280 shop/templates/admin/shop/backup.html:3
+msgid "Начало"
+msgstr "Home"
+
+#: shop/models.py:281
+msgid "Последняя активность"
+msgstr "Last activity"
+
+#: shop/models.py:282
+msgid "Время на сайте, сек"
+msgstr "Time on site, sec"
+
+#: shop/models.py:284
+msgid "User-Agent"
+msgstr "User-Agent"
+
+#: shop/models.py:285 shop/templates/admin/gl_index.html:86
+msgid "Устройство"
+msgstr "Device"
+
+#: shop/models.py:286
+msgid "Тип устройства"
+msgstr "Device type"
+
+#: shop/models.py:287
+msgid "Откуда пришёл"
+msgstr "Referrer"
+
+#: shop/models.py:288 shop/templates/admin/gl_index.html:86
+msgid "Источник"
+msgstr "Source"
+
+#: shop/models.py:289
+msgid "Страница входа"
+msgstr "Landing page"
+
+#: shop/models.py:290 shop/templates/admin/gl_index.html:86
+msgid "Язык"
+msgstr "Language"
+
+#: shop/models.py:291
+msgid "Экран"
+msgstr "Screen"
+
+#: shop/models.py:292 shop/templates/admin/gl_index.html:86
+msgid "Просмотры"
+msgstr "Page views"
+
+#: shop/models.py:293 shop/templates/admin/gl_index.html:86
+msgid "События"
+msgstr "Events"
+
+#: shop/models.py:294
+msgid "Администратор"
+msgstr "Administrator"
+
+#: shop/models.py:297
+msgid "Визиты"
+msgstr "Visits"
+
+#: shop/models.py:312
+msgid "Пользователь"
+msgstr "User"
+
+#: shop/models.py:313
+msgid "Telegram ID"
+msgstr "Telegram ID"
+
+#: shop/models.py:314
+msgid "Username"
+msgstr "Username"
+
+#: shop/models.py:315
+msgid "Имя в Telegram"
+msgstr "Telegram name"
+
+#: shop/models.py:316
+msgid "Привязан"
+msgstr "Linked"
+
+#: shop/models.py:317
+msgid "Последний вход"
+msgstr "Last login"
+
+#: shop/models.py:320
+msgid "Telegram-аккаунт"
+msgstr "Telegram account"
+
+#: shop/models.py:320
+msgid "Telegram-аккаунты"
+msgstr "Telegram accounts"
+
+#: shop/telegram.py:34
+#, python-format
+msgid "нет связи с Telegram (%s)"
+msgstr "cannot reach Telegram (%s)"
+
+#: shop/telegram.py:50
+#, python-format
+msgid "Telegram не принял токен: %s"
+msgstr "Telegram rejected the token: %s"
+
+#: shop/telegram.py:94
+msgid "Новая заявка с сайта GLÜCKSTAL"
+msgstr "New order from the GLÜCKSTAL website"
+
+#: shop/templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr "Django site admin"
+
+#: shop/templates/admin/base_site.html:5
+msgid "Django administration"
+msgstr "Django administration"
+
+#: shop/templates/admin/gl_index.html:31
+msgid "Быстрые ссылки"
+msgstr "Quick links"
+
+#: shop/templates/admin/gl_index.html:32
+msgid "новых"
+msgstr "new"
+
+#: shop/templates/admin/gl_index.html:33
+msgid "Настройки сайта (контакты, «Обо мне», бот, Метрика)"
+msgstr "Site settings (contacts, “About me”, bot, Metrica)"
+
+#: shop/templates/admin/gl_index.html:36
+#: shop/templates/admin/shop/sitesettings/change_form.html:10
+msgid "Импорт / экспорт базы"
+msgstr "Database import / export"
+
+#: shop/templates/admin/gl_index.html:37
+msgid "Открыть сайт"
+msgstr "Open the site"
+
+#: shop/templates/admin/gl_index.html:40
+#, python-format
+msgid ""
+"%(n)s новая заявка не дошла до Telegram — она сохранена здесь, в «Заявках»."
+msgid_plural ""
+"%(n)s новых заявок не дошли до Telegram — они сохранены здесь, в «Заявках»."
+msgstr[0] ""
+"%(n)s new order did not reach Telegram — it is saved here, under “Orders”."
+msgstr[1] ""
+"%(n)s new orders did not reach Telegram — they are saved here, under "
+"“Orders”."
+
+#: shop/templates/admin/gl_index.html:42
+msgid "Статистика"
+msgstr "Statistics"
+
+#: shop/templates/admin/gl_index.html:44
+msgid "Сегодня"
+msgstr "Today"
+
+#: shop/templates/admin/gl_index.html:45
+msgid "7 дней"
+msgstr "7 days"
+
+#: shop/templates/admin/gl_index.html:46 shop/templates/admin/gl_index.html:63
+msgid "30 дней"
+msgstr "30 days"
+
+#: shop/templates/admin/gl_index.html:50 shop/templates/admin/gl_index.html:61
+msgid "визитов"
+msgstr "visits"
+
+#: shop/templates/admin/gl_index.html:51
+msgid "посетителей"
+msgstr "visitors"
+
+#: shop/templates/admin/gl_index.html:52
+msgid "среднее время на сайте"
+msgstr "average time on site"
+
+#: shop/templates/admin/gl_index.html:53 shop/templates/admin/gl_index.html:61
+msgid "заявок"
+msgstr "orders"
+
+#: shop/templates/admin/gl_index.html:54
+msgid "конверсия в заявку"
+msgstr "order conversion"
+
+#: shop/templates/admin/gl_index.html:55
+msgid "переходов в Telegram / WhatsApp"
+msgstr "clicks to Telegram / WhatsApp"
+
+#: shop/templates/admin/gl_index.html:56
+msgid "открытий карточек товаров"
+msgstr "product card views"
+
+#: shop/templates/admin/gl_index.html:60
+msgid "Визиты и заявки за 30 дней"
+msgstr "Visits and orders over 30 days"
+
+#: shop/templates/admin/gl_index.html:63
+msgid "визиты"
+msgstr "visits"
+
+#: shop/templates/admin/gl_index.html:63
+msgid "заявки"
+msgstr "orders"
+
+#: shop/templates/admin/gl_index.html:63
+msgid "визиты администраторов не учитываются"
+msgstr "administrator visits are excluded"
+
+#: shop/templates/admin/gl_index.html:67
+msgid "Последние заявки"
+msgstr "Latest orders"
+
+#: shop/templates/admin/gl_index.html:70
+msgid "Заявок пока нет."
+msgstr "No orders yet."
+
+#: shop/templates/admin/gl_index.html:74
+msgid "Источники и устройства (30 дней)"
+msgstr "Sources and devices (30 days)"
+
+#: shop/templates/admin/gl_index.html:78
+msgid "Данных пока нет."
+msgstr "No data yet."
+
+#: shop/templates/admin/gl_index.html:84
+msgid "Последние визиты"
+msgstr "Latest visits"
+
+#: shop/templates/admin/gl_index.html:84
+msgid "все"
+msgstr "all"
+
+#: shop/templates/admin/gl_index.html:86
+msgid "Время"
+msgstr "Time"
+
+#: shop/templates/admin/gl_index.html:86
+msgid "На сайте"
+msgstr "On site"
+
+#: shop/templates/admin/gl_index.html:91
+msgid "Визитов пока нет."
+msgstr "No visits yet."
+
+#: shop/templates/admin/gl_index.html:96
+msgid "Вход через Telegram"
+msgstr "Telegram login"
+
+#: shop/templates/admin/gl_index.html:98
+#, python-format
+msgid "привязан @%(name)s"
+msgstr "linked to @%(name)s"
+
+#: shop/templates/admin/gl_index.html:99
+msgid "Отвязать"
+msgstr "Unlink"
+
+#: shop/templates/admin/gl_index.html:101
+msgid "привяжите свой Telegram, чтобы входить без пароля:"
+msgstr "link your Telegram to log in without a password:"
+
+#: shop/templates/admin/gl_index.html:105
+msgid ""
+"укажите токен и username бота в настройках сайта, а в @BotFather выполните "
+"/setdomain для домена сайта."
+msgstr ""
+"set the bot token and username in the site settings, and run /setdomain for "
+"the site domain in @BotFather."
+
+#: shop/templates/admin/gl_login.html:13
+msgid "или"
+msgstr "or"
+
+#: shop/templates/admin/gl_login.html:17
+msgid "Войти через Telegram — только для привязанных аккаунтов."
+msgstr "Log in with Telegram — linked accounts only."
+
+#: shop/templates/admin/shop/backup.html:7
+msgid "Экспорт"
+msgstr "Export"
+
+#: shop/templates/admin/shop/backup.html:8
+msgid ""
+"Скачать всё содержимое сайта одним файлом: товары, тексты, контакты, отзывы,"
+" FAQ, заявки, статистику, настройки и пользователей админки."
+msgstr ""
+"Download all site content as one file: products, texts, contacts, reviews, "
+"FAQ, orders, statistics, settings and admin users."
+
+#: shop/templates/admin/shop/backup.html:9
+msgid "В файле есть токен бота — храните его как пароль."
+msgstr "The file contains the bot token — keep it as safe as a password."
+
+#: shop/templates/admin/shop/backup.html:11
+msgid "Скачать полную копию (база + фото)"
+msgstr "Download a full backup (database + photos)"
+
+#: shop/templates/admin/shop/backup.html:12
+msgid "Только база (без фото)"
+msgstr "Database only (no photos)"
+
+#: shop/templates/admin/shop/backup.html:17
+msgid "Импорт"
+msgstr "Import"
+
+#: shop/templates/admin/shop/backup.html:18
+msgid ""
+"Загрузите файл, скачанный выше (.zip), или файл базы .sqlite3. Текущие "
+"данные будут заменены; перед заменой автоматически сохраняется копия "
+"текущего состояния (последние 5 — ниже). Если в архиве нет фото, фото на "
+"сайте останутся прежними."
+msgstr ""
+"Upload a file downloaded above (.zip) or an .sqlite3 database file. The "
+"current data will be replaced; a copy of the current state is saved "
+"automatically before that (the last 5 are listed below). If the archive has "
+"no photos, the photos on the site stay unchanged."
+
+#: shop/templates/admin/shop/backup.html:21
+msgid "Понимаю, что текущие данные сайта будут заменены"
+msgstr "I understand that the current site data will be replaced"
+
+#: shop/templates/admin/shop/backup.html:22
+msgid "Загрузить и восстановить"
+msgstr "Upload and restore"
+
+#: shop/templates/admin/shop/backup.html:27
+msgid "Автоматические копии перед импортом"
+msgstr "Automatic backups made before imports"
+
+#: shop/templates/admin/shop/backup.html:30
+msgid "Пока нет."
+msgstr "None yet."
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:6
+msgid "Telegram-бот"
+msgstr "Telegram bot"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:7
+msgid "токен сохранён"
+msgstr "token saved"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:7
+msgid "токен не задан"
+msgstr "no token set"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:8
+msgid "Найти чаты"
+msgstr "Find chats"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:9
+msgid "Отправить тест"
+msgstr "Send a test"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:20
+msgid "Ищу…"
+msgstr "Searching…"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:20 shop/views.py:83
+msgid "Отправляю…"
+msgstr "Sending…"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:20
+msgid "Добавить"
+msgstr "Add"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:21
+msgid "Добавлен — нажмите «Сохранить»"
+msgstr "Added — click “Save”"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:21
+msgid "доставлено"
+msgstr "delivered"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:22
+msgid "Боту пока никто не писал. Откройте бота, нажмите Start и повторите."
+msgstr ""
+"Nobody has written to the bot yet. Open the bot, press Start and try again."
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:23
+msgid "Бот"
+msgstr "Bot"
+
+#: shop/templates/admin/shop/sitesettings/change_form.html:23
+msgid "Ошибка"
+msgstr "Error"
+
+#: shop/templates/shop/index.html:44
+msgid "Перейти к каталогу"
+msgstr "Skip to the catalog"
+
+#: shop/templates/shop/index.html:48
+msgid "на главную"
+msgstr "home"
+
+#: shop/templates/shop/index.html:52
+msgid "Основное меню"
+msgstr "Main menu"
+
+#: shop/templates/shop/index.html:53 shop/templates/shop/index.html:99
+msgid "Изделия"
+msgstr "Products"
+
+#: shop/templates/shop/index.html:54
+msgid "Подарки"
+msgstr "Gifts"
+
+#: shop/templates/shop/index.html:55 shop/templates/shop/index.html:141
+msgid "Как заказать"
+msgstr "How to order"
+
+#: shop/templates/shop/index.html:56 shop/templates/shop/index.html:163
+msgid "Обо мне"
+msgstr "About me"
+
+#: shop/templates/shop/index.html:57
+msgid "Вопросы"
+msgstr "FAQ"
+
+#: shop/templates/shop/index.html:58
+msgid "Контакты"
+msgstr "Contacts"
+
+#: shop/templates/shop/index.html:61 shop/templates/shop/index.html:262
+msgid "Заказать"
+msgstr "Order"
+
+#: shop/templates/shop/index.html:62
+msgid "Открыть меню"
+msgstr "Open menu"
+
+#: shop/templates/shop/index.html:74
+msgid "Смотреть изделия"
+msgstr "View products"
+
+#: shop/templates/shop/index.html:75 shop/templates/shop/index.html:248
+msgid "Написать в Telegram"
+msgstr "Message on Telegram"
+
+#: shop/templates/shop/index.html:78
+msgid "моделей в каталоге"
+msgstr "designs in the catalog"
+
+#: shop/templates/shop/index.html:79 shop/views.py:42 shop/views.py:82
+msgid "от"
+msgstr "from"
+
+#: shop/templates/shop/index.html:79
+msgid "цены на изделия"
+msgstr "product prices"
+
+#: shop/templates/shop/index.html:80
+msgid "натуральная кожа, ручной шов"
+msgstr "genuine leather, hand-stitched"
+
+#: shop/templates/shop/index.html:84
+#, python-format
+msgid "Изделия мастерской %(brand)s из натуральной кожи"
+msgstr "Genuine leather goods by the %(brand)s workshop"
+
+#: shop/templates/shop/index.html:89
+#, python-format
+msgid "Почему %(brand)s"
+msgstr "Why %(brand)s"
+
+#: shop/templates/shop/index.html:100
+msgid "Цены — за базовую модель. Цвет, размер и детали обсуждаем при заказе."
+msgstr ""
+"Prices are for the base design. Colour, size and details are agreed when "
+"ordering."
+
+#: shop/templates/shop/index.html:102
+msgid "Фильтр по категориям"
+msgstr "Filter by category"
+
+#: shop/templates/shop/index.html:103
+msgid "Все"
+msgstr "All"
+
+#: shop/templates/shop/index.html:105 shop/templates/shop/index.html:131
+msgid "До"
+msgstr "Under"
+
+#: shop/templates/shop/index.html:109
+msgid "подробнее"
+msgstr "details"
+
+#: shop/templates/shop/index.html:110
+#, python-format
+msgid "%(name)s из натуральной кожи ручной работы"
+msgstr "%(name)s, handmade from genuine leather"
+
+#: shop/templates/shop/index.html:115 shop/views.py:86
+msgid "фото и описание"
+msgstr "photos and description"
+
+#: shop/templates/shop/index.html:115
+msgid "Подробнее"
+msgstr "Details"
+
+#: shop/templates/shop/index.html:120
+msgid "В этой подборке пока ничего нет."
+msgstr "Nothing in this selection yet."
+
+#: shop/templates/shop/index.html:127
+msgid "Идеи подарков"
+msgstr "Gift ideas"
+
+#: shop/templates/shop/index.html:128
+msgid "Кожаная вещь ручной работы — подарок, которым пользуются каждый день."
+msgstr "A handmade leather piece is a gift that gets used every day."
+
+#: shop/templates/shop/index.html:131
+msgid "Недорогие подарки из каталога"
+msgstr "Affordable gifts from the catalog"
+
+#: shop/templates/shop/index.html:132
+msgid "Мужчине"
+msgstr "For him"
+
+#: shop/templates/shop/index.html:132
+msgid "Портмоне, ремни, аксессуары для документов"
+msgstr "Wallets, belts, document holders"
+
+#: shop/templates/shop/index.html:133
+msgid "Женщине"
+msgstr "For her"
+
+#: shop/templates/shop/index.html:133
+msgid "Сумки, клатчи, чехлы и аксессуары"
+msgstr "Bags, clutches, cases and accessories"
+
+#: shop/templates/shop/index.html:134 shop/templates/shop/index.html:217
+msgid "Подарочный бокс"
+msgstr "Gift box"
+
+#: shop/templates/shop/index.html:134
+msgid "Набор изделий в одном стиле. Наполнение собираем вместе под человека."
+msgstr ""
+"A set of pieces in one style. We choose the contents together for the "
+"person."
+
+#: shop/templates/shop/index.html:151 shop/templates/shop/index.html:218
+msgid "Своя модель"
+msgstr "Custom design"
+
+#: shop/templates/shop/index.html:151
+msgid "Обсудить свою идею"
+msgstr "Discuss your idea"
+
+#: shop/templates/shop/index.html:160
+#, python-format
+msgid "%(name)s — мастер %(brand)s"
+msgstr "%(name)s — the maker behind %(brand)s"
+
+#: shop/templates/shop/index.html:166
+#, python-format
+msgid "Мастерская %(brand)s"
+msgstr "The %(brand)s workshop"
+
+#: shop/templates/shop/index.html:175
+msgid "Фото к отзыву"
+msgstr "Review photo"
+
+#: shop/templates/shop/index.html:175
+msgid "источник"
+msgstr "source"
+
+#: shop/templates/shop/index.html:177
+#, python-format
+msgid ""
+"Отзывы покупателей и фото готовых работ — в сообществе мастерской во "
+"ВКонтакте. Купили изделие %(brand)s? Буду рада вашему отзыву!"
+msgstr ""
+"Customer reviews and photos of finished pieces are in the workshop's VK "
+"community. Bought something from %(brand)s? I'd love to hear from you!"
+
+#: shop/templates/shop/index.html:178
+msgid "Отзывы во ВКонтакте"
+msgstr "Reviews on VK"
+
+#: shop/templates/shop/index.html:195
+msgid "Оставить заявку"
+msgstr "Place an order"
+
+#: shop/templates/shop/index.html:196
+msgid ""
+"Напишите, что хотите заказать, — я свяжусь с вами, чтобы обсудить кожу, цвет"
+" и детали."
+msgstr ""
+"Tell me what you'd like to order and I'll get in touch to discuss the "
+"leather, colour and details."
+
+#: shop/templates/shop/index.html:197
+msgid "Удобнее сразу в мессенджере?"
+msgstr "Prefer a messenger?"
+
+#: shop/templates/shop/index.html:201 shop/templates/shop/index.html:240
+msgid "ВКонтакте"
+msgstr "VK"
+
+#: shop/templates/shop/index.html:205
+msgid "Ваше имя"
+msgstr "Your name"
+
+#: shop/templates/shop/index.html:206
+msgid "Телефон или @ник в Telegram"
+msgstr "Phone or Telegram @username"
+
+#: shop/templates/shop/index.html:206
+msgid "+7 900 000-00-00 или @nick"
+msgstr "+44 7700 900000 or @username"
+
+#: shop/templates/shop/index.html:208
+msgid "Как с вами связаться"
+msgstr "How should I contact you"
+
+#: shop/templates/shop/index.html:211
+msgid "Звонок"
+msgstr "Phone call"
+
+#: shop/templates/shop/index.html:215
+msgid "выберите или опишите ниже"
+msgstr "choose or describe below"
+
+#: shop/templates/shop/index.html:221
+msgid "Цвет кожи и ниток, размеры, тиснение инициалов, к какой дате нужно…"
+msgstr ""
+"Leather and thread colour, sizes, embossed initials, when you need it…"
+
+#: shop/templates/shop/index.html:222
+msgid "Не заполняйте"
+msgstr "Leave empty"
+
+#: shop/templates/shop/index.html:223
+msgid "Согласен(на) на обработку персональных данных по"
+msgstr "I agree to the processing of my personal data under the"
+
+#: shop/templates/shop/index.html:223
+msgid "политике конфиденциальности"
+msgstr "privacy policy"
+
+#: shop/templates/shop/index.html:224
+msgid "Отправить заявку"
+msgstr "Send the order"
+
+#: shop/templates/shop/index.html:234
+msgid "Логотип"
+msgstr "Logo"
+
+#: shop/templates/shop/index.html:235
+msgid "Мастерская кожаных изделий ручной работы"
+msgstr "Handmade leather goods workshop"
+
+#: shop/templates/shop/index.html:242
+msgid "Старый сайт (Tilda)"
+msgstr "Old website (Tilda)"
+
+#: shop/templates/shop/index.html:244 shop/templates/shop/privacy.html:2
+#: shop/templates/shop/privacy.html:6
+msgid "Политика конфиденциальности"
+msgstr "Privacy policy"
+
+#: shop/templates/shop/index.html:252
+msgid "Закрыть"
+msgstr "Close"
+
+#: shop/templates/shop/index.html:263
+msgid "Спросить в Telegram"
+msgstr "Ask on Telegram"
+
+#: shop/templates/shop/privacy.html:5
+msgid "На главную"
+msgstr "Back to home"
+
+#: shop/templates/shop/privacy.html:7
+#, python-format
+msgid ""
+"Настоящая политика описывает, как обрабатываются персональные данные, "
+"которые вы оставляете на сайте %(url)s (далее — Сайт)."
+msgstr ""
+"This policy describes how the personal data you leave on %(url)s (the "
+"“Site”) is processed."
+
+#: shop/templates/shop/privacy.html:8
+msgid "Оператор"
+msgstr "Data controller"
+
+#: shop/templates/shop/privacy.html:9
+#, python-format
+msgid "Оператор персональных данных — %(name)s, мастерская %(brand)s."
+msgstr "The personal data controller is %(name)s, the %(brand)s workshop."
+
+#: shop/templates/shop/privacy.html:10
+#, python-format
+msgid "Город: %(city)s."
+msgstr "City: %(city)s."
+
+#: shop/templates/shop/privacy.html:11
+msgid "Связь"
+msgstr "Contact"
+
+#: shop/templates/shop/privacy.html:12
+msgid "Какие данные собираются"
+msgstr "What data is collected"
+
+#: shop/templates/shop/privacy.html:13
+msgid ""
+"Имя, телефон или ник в мессенджере, предпочтительный способ связи и текст "
+"пожеланий к заказу — только то, что вы сами указали в форме заявки."
+msgstr ""
+"Your name, phone number or messenger username, preferred contact method and "
+"order wishes — only what you enter in the order form yourself."
+
+#: shop/templates/shop/privacy.html:14
+msgid ""
+"Статистика посещений: IP-адрес, тип устройства и браузера (User-Agent), "
+"страница, с которой вы пришли, время на сайте и нажатия на кнопки сайта. Эти"
+" данные сохраняются на сервере сайта и не содержат ваших имени или "
+"контактов."
+msgstr ""
+"Visit statistics: IP address, device and browser type (User-Agent), the page"
+" you came from, time on the site and clicks on site buttons. This data is "
+"stored on the site server and contains neither your name nor your contacts."
+
+#: shop/templates/shop/privacy.html:15
+msgid ""
+"Также Сайт может использовать сервис веб-аналитики Яндекс.Метрика, который "
+"собирает обезличенные данные о посещениях (cookie, IP-адрес, сведения о "
+"браузере)."
+msgstr ""
+"The Site may also use the Yandex Metrica web analytics service, which "
+"collects anonymised visit data (cookies, IP address, browser details)."
+
+#: shop/templates/shop/privacy.html:16
+msgid "Цели обработки"
+msgstr "Purposes of processing"
+
+#: shop/templates/shop/privacy.html:17
+msgid ""
+"Связаться с вами по заявке, обсудить и выполнить заказ. Данные статистики "
+"используются для улучшения Сайта и защиты от спама."
+msgstr ""
+"To contact you about your order, discuss it and fulfil it. Statistics are "
+"used to improve the Site and to protect it from spam."
+
+#: shop/templates/shop/privacy.html:18
+msgid "Правовое основание"
+msgstr "Legal basis"
+
+#: shop/templates/shop/privacy.html:19
+msgid ""
+"Ваше согласие, которое вы даёте, отмечая соответствующий пункт в форме (ст. "
+"6 Федерального закона № 152-ФЗ «О персональных данных»)."
+msgstr ""
+"Your consent, given by ticking the corresponding box in the form (Article 6 "
+"of Russian Federal Law No. 152-FZ “On Personal Data”)."
+
+#: shop/templates/shop/privacy.html:20
+msgid "Хранение и передача"
+msgstr "Storage and transfer"
+
+#: shop/templates/shop/privacy.html:21
+msgid ""
+"Заявка сохраняется на сервере сайта и передаётся мастеру через мессенджер "
+"Telegram. Данные не продаются и не передаются третьим лицам, кроме случаев, "
+"предусмотренных законом. Заявки хранятся не дольше, чем это нужно для "
+"выполнения заказа; статистика посещений — не дольше 12 месяцев."
+msgstr ""
+"Orders are stored on the site server and forwarded to the maker via "
+"Telegram. The data is not sold or shared with third parties except where "
+"required by law. Orders are kept no longer than needed to fulfil them; visit"
+" statistics — no longer than 12 months."
+
+#: shop/templates/shop/privacy.html:22
+msgid "Ваши права"
+msgstr "Your rights"
+
+#: shop/templates/shop/privacy.html:23
+msgid ""
+"Вы можете в любой момент запросить уточнение или удаление своих данных и "
+"отозвать согласие"
+msgstr ""
+"You may at any time request correction or deletion of your data and withdraw"
+" your consent"
+
+#: shop/templates/shop/privacy.html:23
+msgid "написав на"
+msgstr "by writing to"
+
+#: shop/templates/shop/privacy.html:24
+msgid "Редакция от"
+msgstr "Version of"
+
+#: shop/views.py:82
+msgid "фото"
+msgstr "photo"
+
+#: shop/views.py:82
+msgid "из"
+msgstr "of"
+
+#: shop/views.py:83
+msgid "Заполните имя, контакт и подтвердите согласие."
+msgstr "Please fill in your name and contact and confirm your consent."
+
+#: shop/views.py:84
+msgid "Спасибо! Заявка отправлена — скоро свяжусь с вами."
+msgstr "Thank you! Your order has been sent — I'll be in touch soon."
+
+#: shop/views.py:85
+msgid ""
+"Не получилось отправить. Напишите, пожалуйста, напрямую в Telegram или "
+"позвоните."
+msgstr "Sending failed. Please message me directly on Telegram or call."
+
+#: shop/views.py:103
+msgid "Каталог изделий"
+msgstr "Product catalog"
+
+#: shop/views.py:107
+msgid "натуральная кожа"
+msgstr "genuine leather"

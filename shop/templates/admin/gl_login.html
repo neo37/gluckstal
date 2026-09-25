@@ -1,0 +1,20 @@
+{% extends "admin/login.html" %}
+{% load i18n gl %}
+{% block content %}
+{% get_current_language as LANG %}
+<form action="{% url 'set_language' %}" method="post" style="text-align:right;margin-bottom:8px">{% csrf_token %}
+  <input name="next" type="hidden" value="{{ request.get_full_path }}">
+  <button type="submit" name="language" value="{% if LANG == 'en' %}ru{% else %}en{% endif %}" class="button" style="padding:4px 10px">{% if LANG == 'en' %}Русский{% else %}English{% endif %}</button>
+</form>
+{{ block.super }}
+{% gl_settings as s %}
+{% if s.bot_token and s.bot_username %}
+<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--hairline-color);text-align:center">
+  <p style="margin-bottom:10px">{% translate "или" %}</p>
+  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="{{ s.bot_username }}" data-size="large"
+          data-lang="{{ LANG }}" data-request-access="write"
+          data-auth-url="{% url 'telegram_login' %}?next={{ next|default:'/admin/'|urlencode }}"></script>
+  <p style="font-size:12px;color:var(--body-quiet-color);margin-top:8px">{% translate "Войти через Telegram — только для привязанных аккаунтов." %}</p>
+</div>
+{% endif %}
+{% endblock %}

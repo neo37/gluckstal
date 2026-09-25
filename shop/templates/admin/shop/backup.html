@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% translate "Начало" %}</a> › {% translate "Резервная копия сайта" %}</div>{% endblock %}
+{% block content %}
+<div id="content-main" style="max-width:760px">
+  <div class="module" style="padding:16px 20px;margin-bottom:20px">
+    <h2 style="margin:-16px -20px 12px;padding:8px 20px">{% translate "Экспорт" %}</h2>
+    <p>{% translate "Скачать всё содержимое сайта одним файлом: товары, тексты, контакты, отзывы, FAQ, заявки, статистику, настройки и пользователей админки." %}
+       <b>{% translate "В файле есть токен бота — храните его как пароль." %}</b></p>
+    <p>
+      <a class="button default" style="padding:8px 14px" href="{% url 'admin:shop_backup_export' %}?media=1">⬇ {% translate "Скачать полную копию (база + фото)" %}</a>
+      <a class="button" style="padding:8px 14px;margin-left:8px" href="{% url 'admin:shop_backup_export' %}?media=0">⬇ {% translate "Только база (без фото)" %}</a>
+    </p>
+  </div>
+
+  <div class="module" style="padding:16px 20px;margin-bottom:20px">
+    <h2 style="margin:-16px -20px 12px;padding:8px 20px">{% translate "Импорт" %}</h2>
+    <p>{% translate "Загрузите файл, скачанный выше (.zip), или файл базы .sqlite3. Текущие данные будут заменены; перед заменой автоматически сохраняется копия текущего состояния (последние 5 — ниже). Если в архиве нет фото, фото на сайте останутся прежними." %}</p>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+      <p><input type="file" name="file" accept=".zip,.sqlite3,.db" required></p>
+      <p><label><input type="checkbox" name="confirm" value="yes" required> {% translate "Понимаю, что текущие данные сайта будут заменены" %}</label></p>
+      <p><button class="button default" style="padding:8px 14px" type="submit">⬆ {% translate "Загрузить и восстановить" %}</button></p>
+    </form>
+  </div>
+
+  <div class="module" style="padding:16px 20px">
+    <h2 style="margin:-16px -20px 12px;padding:8px 20px">{% translate "Автоматические копии перед импортом" %}</h2>
+    {% if backups %}<ul>{% for b in backups %}
+      <li><a href="{% url 'admin:shop_backup_export' %}?file={{ b.name|urlencode }}">{{ b.name }}</a> — {{ b.size|filesizeformat }}</li>
+    {% endfor %}</ul>{% else %}<p>{% translate "Пока нет." %}</p>{% endif %}
+  </div>
+</div>
+{% endblock %}

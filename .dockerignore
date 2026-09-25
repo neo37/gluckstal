@@ -1,0 +1,8 @@
+.env
+data
+content
+_old
+staticfiles
+.git
+**/__pycache__
+*.md

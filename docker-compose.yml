@@ -1,0 +1,15 @@
+services:
+  gluckstal:
+    build: .
+    image: gluckstal-site:latest
+    container_name: gluckstal
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8091:8080"
+    volumes:
+      - data:/data                   # SQLite-база, загруженные фото, ключ сессий
+    mem_limit: 256m
+
+volumes:
+  data:

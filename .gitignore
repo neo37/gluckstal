@@ -1,0 +1,12 @@
+# секреты
+.env
+# данные и контент — не в репозитории
+data/
+content/
+media/
+*.sqlite3*
+staticfiles/
+# старая реализация и мусор
+_old/
+__pycache__/
+*.pyc

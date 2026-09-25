@@ -1,0 +1,64 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block form_top %}
+<div style="background:var(--darkened-bg);border:1px solid var(--hairline-color);border-radius:8px;padding:12px 16px;margin-bottom:16px">
+  <b>{% translate "Telegram-бот" %}:</b>
+  {% if token_set %}{% translate "токен сохранён" %} (<code>{{ token_hint }}</code>){% else %}<span style="color:var(--error-fg)">{% translate "токен не задан" %}</span>{% endif %}
+  · <button type="button" class="button" id="gl-find">{% translate "Найти чаты" %}</button>
+  <button type="button" class="button" id="gl-test">{% translate "Отправить тест" %}</button>
+  · <a href="{% url 'admin:shop_backup' %}">💾 {% translate "Импорт / экспорт базы" %}</a>
+  <div id="gl-out" style="margin-top:8px"></div>
+</div>
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+(() => {
+  const T = {
+    searching: "{{ _('Ищу…')|escapejs }}", sending: "{{ _('Отправляю…')|escapejs }}", add: "{{ _('Добавить')|escapejs }}",
+    added: "{{ _('Добавлен — нажмите «Сохранить»')|escapejs }}", delivered: "{{ _('доставлено')|escapejs }}",
+    nobody: "{{ _('Боту пока никто не писал. Откройте бота, нажмите Start и повторите.')|escapejs }}",
+    bot: "{{ _('Бот')|escapejs }}", error: "{{ _('Ошибка')|escapejs }}",
+  };
+  const out = document.getElementById('gl-out');
+  const csrf = document.querySelector('[name=csrfmiddlewaretoken]').value;
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  async function call(url, method) {
+    const r = await fetch(url, { method, headers: { 'X-CSRFToken': csrf }, credentials: 'same-origin' });
+    const d = await r.json().catch(() => ({ error: T.error + ' ' + r.status }));
+    if (!r.ok) throw new Error(d.error || T.error);
+    return d;
+  }
+  document.getElementById('gl-find').addEventListener('click', async () => {
+    out.textContent = T.searching;
+    try {
+      const d = await call('{% url "admin:shop_bot_chats" %}', 'GET');
+      if (!d.chats.length) {
+        out.innerHTML = `${T.bot} <a href="https://t.me/${esc(d.bot)}" target="_blank">@${esc(d.bot)}</a>: ${esc(T.nobody)}`;
+        return;
+      }
+      out.innerHTML = d.chats.map(c => `<div style="margin:4px 0"><b>${esc(c.name || c.username)}</b> ${c.username ? '@' + esc(c.username) : ''}
+        <span style="color:var(--body-quiet-color)">${esc(c.type)} · ${esc(c.id)}</span>
+        <button type="button" class="button" data-add="${esc(c.id)}">${esc(T.add)}</button></div>`).join('');
+      out.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => {
+        const inp = document.getElementById('id_chat_ids');
+        const ids = inp.value.split(/[,\s]+/).filter(Boolean);
+        if (!ids.includes(b.dataset.add)) ids.push(b.dataset.add);
+        inp.value = ids.join(', ');
+        b.textContent = T.added; b.disabled = true;
+      }));
+    } catch (e) { out.innerHTML = `<span style="color:var(--error-fg)">${esc(e.message)}</span>`; }
+  });
+  document.getElementById('gl-test').addEventListener('click', async () => {
+    out.textContent = T.sending;
+    try {
+      const d = await call('{% url "admin:shop_bot_test" %}', 'POST');
+      out.innerHTML = `${T.bot} @${esc(d.bot)}: ` + Object.entries(d.results).map(([id, r]) =>
+        `<div>${esc(id)} — ${r === 'ok' ? '✅ ' + esc(T.delivered) : '❌ ' + esc(r)}</div>`).join('');
+    } catch (e) { out.innerHTML = `<span style="color:var(--error-fg)">${esc(e.message)}</span>`; }
+  });
+})();
+</script>
+{% endblock %}

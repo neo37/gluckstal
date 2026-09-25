@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></div>
+{% if user.is_anonymous %}{% include "admin/color_theme_toggle.html" %}{% endif %}
+{% endblock %}
+{% block userlinks %}
+{% get_current_language as LANG %}{% get_available_languages as LANGS %}
+<form action="{% url 'set_language' %}" method="post" style="display:inline">{% csrf_token %}
+  <input name="next" type="hidden" value="{{ request.get_full_path }}">
+  {% for code, name in LANGS %}{% if code != LANG %}<button type="submit" name="language" value="{{ code }}" style="background:none;border:0;color:inherit;cursor:pointer;text-decoration:underline;padding:0" lang="{{ code }}">{% if code == "en" %}English{% else %}Русский{% endif %}</button>{% endif %}{% endfor %}
+</form> /
+{{ block.super }}
+{% endblock %}
+{% block nav-global %}{% endblock %}

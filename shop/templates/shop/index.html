@@ -1,0 +1,271 @@
+{% load static i18n gl %}<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% firstof s|tr:"seo_title" s.brand %}</title>
+<meta name="description" content="{{ s|tr:"seo_description" }}">
+<link rel="canonical" href="{{ here }}">
+{% for code, url in alternates %}<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">
+{% endfor %}<link rel="alternate" hreflang="x-default" href="{{ site }}/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#2b1d14">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{% if lang == "en" %}en_US{% else %}ru_RU{% endif %}">
+<meta property="og:site_name" content="{{ s.brand }}">
+<meta property="og:url" content="{{ here }}">
+<meta property="og:title" content="{{ s.brand }} — {{ s|tr:"hero_title"|lower }}{% with city=s|tr:"city" %}{% if city %}, {{ city }}{% endif %}{% endwith %}">
+<meta property="og:description" content="{{ s|tr:"seo_description" }}">
+{% if og_image %}<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="{% static 'shop/favicon.svg' %}" type="image/svg+xml">
+{% if logo_img %}<link rel="apple-touch-icon" href="{{ logo_img }}">{% endif %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+{% if hero_1600 %}<link rel="preload" as="image" href="{{ hero_1600 }}" imagesrcset="{{ hero_900 }} 900w, {{ hero_1600 }} 1600w" imagesizes="(max-width: 900px) 100vw, 55vw">{% endif %}
+<link rel="stylesheet" href="{% static 'shop/style.css' %}">
+<script type="application/ld+json">{{ jsonld }}</script>
+{% if s.metrika_id %}<script>window.__glMetrika={{ s.metrika_id }};(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym({{ s.metrika_id }},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/{{ s.metrika_id }}" style="position:absolute;left:-9999px" alt=""></div></noscript>{% endif %}
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tri" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"><path id="leaf" d="M50 8 A36 36 0 0 1 50 66 A36 36 0 0 1 50 8Z"/><use href="#leaf" transform="rotate(120 50 50)"/><use href="#leaf" transform="rotate(240 50 50)"/><circle cx="50" cy="50" r="24"/></g></symbol>
+  <symbol id="tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.9 4.3 18.8 19c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-7.9c.4-.3-.1-.5-.6-.2L6.7 12.9l-4.6-1.4c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.6.2 1.6 1.2Z"/></symbol>
+  <symbol id="vk" viewBox="0 0 24 24"><path fill="currentColor" d="M12.8 18c-6 0-9.4-4.1-9.6-11h3c.1 5 2.3 7.2 4.1 7.6V7h2.8v4.3c1.7-.2 3.6-2.2 4.2-4.3h2.8c-.5 2.7-2.4 4.7-3.8 5.5 1.4.7 3.6 2.4 4.4 5.5h-3.1c-.6-2-2.3-3.6-4.5-3.8V18h-.3Z"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="mail" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></symbol>
+  <symbol id="globe" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-3a15.7 15.7 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8ZM12 4c.8 1.2 1.5 2.5 1.9 4h-3.8c.4-1.5 1.1-2.8 1.9-4ZM4.3 14a8.2 8.2 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3Zm.8 2h3a15.7 15.7 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16Zm3-8h-3a8 8 0 0 1 4.4-3.6C8.9 5.5 8.4 6.7 8.1 8ZM12 20c-.8-1.2-1.5-2.5-1.9-4h3.8c-.4 1.5-1.1 2.8-1.9 4Zm2.3-6H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4Zm.3 5.6c.6-1.1 1.1-2.3 1.4-3.6h3a8 8 0 0 1-4.4 3.6Zm1.7-5.6a16.5 16.5 0 0 0 0-4h3.4a8.2 8.2 0 0 1 0 4h-3.4Z"/></symbol>
+</svg>
+
+<a class="skip" href="#catalog">{% translate "Перейти к каталогу" %}</a>
+
+<header class="header" id="top">
+  <div class="wrap header__in">
+    <a class="logo" href="#top" aria-label="{{ s.brand }} — {% translate "на главную" %}">
+      <svg class="logo__mark"><use href="#tri"/></svg>
+      <span class="logo__text">{{ s.brand }}</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="{% translate "Основное меню" %}">
+      <a href="#catalog">{% translate "Изделия" %}</a>
+      <a href="#gifts">{% translate "Подарки" %}</a>
+      <a href="#how">{% translate "Как заказать" %}</a>
+      <a href="#about">{% translate "Обо мне" %}</a>
+      <a href="#faq">{% translate "Вопросы" %}</a>
+      <a href="#contacts">{% translate "Контакты" %}</a>
+      <a class="nav__lang" href="{{ other_url }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" data-lang-switch="{{ other_lang }}" title="{% if other_lang == "en" %}English version{% else %}Русская версия{% endif %}">{{ other_lang|upper }}</a>
+    </nav>
+    <a class="btn btn--sm header__cta" href="#order" data-goal="cta_header">{% translate "Заказать" %}</a>
+    <button class="burger" id="burger" aria-label="{% translate "Открыть меню" %}" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero__in">
+    <div class="hero__text">
+      {% with eb=s|tr:"hero_eyebrow" lead=s|tr:"hero_lead" %}{% if eb %}<p class="eyebrow"><svg class="i"><use href="#tri"/></svg> {{ eb }}</p>{% endif %}
+      <h1>{{ s|tr:"hero_title" }}</h1>
+      {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}{% endwith %}
+      <div class="hero__cta">
+        <a class="btn" href="#catalog">{% translate "Смотреть изделия" %}</a>
+        {% if s.telegram %}<a class="btn btn--ghost" href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener" data-goal="tg_click"><svg class="i"><use href="#tg"/></svg> {% translate "Написать в Telegram" %}</a>{% endif %}
+      </div>
+      <ul class="facts">
+        <li><b>{{ count }}</b><span>{% translate "моделей в каталоге" %}</span></li>
+        <li><b>{% translate "от" %} {{ min_price }}</b><span>{% translate "цены на изделия" %}</span></li>
+        <li><b>100%</b><span>{% translate "натуральная кожа, ручной шов" %}</span></li>
+      </ul>
+    </div>
+    {% if hero_1600 %}<div class="hero__img">
+      <img src="{{ hero_1600 }}" srcset="{{ hero_900 }} 900w, {{ hero_1600 }} 1600w" sizes="(max-width: 900px) 100vw, 55vw" width="1600" height="1139" alt="{% blocktranslate with brand=s.brand %}Изделия мастерской {{ brand }} из натуральной кожи{% endblocktranslate %}" fetchpriority="high">
+    </div>{% endif %}
+  </div>
+</section>
+
+{% if perks %}<section class="perks" aria-label="{% blocktranslate with brand=s.brand %}Почему {{ brand }}{% endblocktranslate %}">
+  <div class="wrap perks__grid">
+    {% for c in perks %}<div class="perk"><svg class="perk__i"><use href="#tri"/></svg><h3>{{ c|tr:"title" }}</h3><p>{{ c|tr:"text" }}</p></div>
+    {% endfor %}
+  </div>
+</section>{% endif %}
+
+<section class="section" id="catalog">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>{% translate "Изделия" %}</h2>
+      <p>{% translate "Цены — за базовую модель. Цвет, размер и детали обсуждаем при заказе." %}</p>
+    </div>
+    <div class="chips" role="toolbar" aria-label="{% translate "Фильтр по категориям" %}">
+      <button class="chip is-active" data-filter="all" aria-pressed="true">{% translate "Все" %} <span>{{ count }}</span></button>
+      {% for c in cats %}<button class="chip" data-filter="{{ c.slug }}" aria-pressed="false">{{ c.label }} <span>{{ c.n }}</span></button>
+      {% endfor %}{% if under2000 %}<button class="chip" data-filter="under2000" aria-pressed="false">{% translate "До" %} {{ under2000_label }} <span>{{ under2000 }}</span></button>{% endif %}
+    </div>
+    <ul class="grid" id="grid">
+      {% for p in products %}<li class="card" data-slug="{{ p.slug }}">
+        <button class="card__open" aria-label="{{ p.label }} — {% translate "подробнее" %}">
+          {% if p.cover %}<img class="card__img" src="{{ p.cover }}" width="600" height="450" loading="lazy" alt="{% blocktranslate with name=p.label %}{{ name }} из натуральной кожи ручной работы{% endblocktranslate %}">{% else %}<div class="card__img"></div>{% endif %}
+        </button>
+        <div class="card__body">
+          <h3 class="card__name">{{ p.label }}</h3>
+          <p class="card__short">{{ p.points.0 }}</p>
+          <div class="card__foot"><span class="price">{{ p.price_label }}</span><button class="card__open card__more" aria-label="{{ p.label }}: {% translate "фото и описание" %}">{% translate "Подробнее" %} →</button></div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="empty" id="empty" hidden>{% translate "В этой подборке пока ничего нет." %}</p>
+  </div>
+</section>
+
+<section class="section section--alt" id="gifts">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>{% translate "Идеи подарков" %}</h2>
+      <p>{% translate "Кожаная вещь ручной работы — подарок, которым пользуются каждый день." %}</p>
+    </div>
+    <div class="gifts">
+      <button class="gift" data-jump="under2000"><b>{% translate "До" %} {{ under2000_label }}</b><span>{% translate "Недорогие подарки из каталога" %}</span></button>
+      <button class="gift" data-jump="him"><b>{% translate "Мужчине" %}</b><span>{% translate "Портмоне, ремни, аксессуары для документов" %}</span></button>
+      <button class="gift" data-jump="her"><b>{% translate "Женщине" %}</b><span>{% translate "Сумки, клатчи, чехлы и аксессуары" %}</span></button>
+      <a class="gift gift--box" href="#order" data-product="{% translate "Подарочный бокс" %}"><b>{% translate "Подарочный бокс" %}</b><span>{% translate "Набор изделий в одном стиле. Наполнение собираем вместе под человека." %}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section__head"><h2>{% translate "Как заказать" %}</h2></div>
+    {% if steps %}<ol class="steps">
+      {% for c in steps %}<li><b>{{ c|tr:"title" }}</b><span>{{ c|tr:"text" }}</span></li>
+      {% endfor %}
+    </ol>{% endif %}
+    {% with ct=s|tr:"custom_title" %}{% if ct %}<div class="custom">
+      {% if custom_img %}<img src="{{ custom_img }}" width="900" height="1350" loading="lazy" alt="{{ ct }}">{% endif %}
+      <div class="custom__text">
+        <h3>{{ ct }}</h3>
+        {{ custom_html }}
+        <a class="btn" href="#order" data-product="{% translate "Своя модель" %}">{% translate "Обсудить свою идею" %}</a>
+      </div>
+    </div>{% endif %}{% endwith %}
+  </div>
+</section>
+
+<section class="section section--dark" id="about">
+  <div class="wrap about">
+    {% if about_img %}<div class="about__img">
+      <img src="{{ about_img }}" width="900" height="1350" loading="lazy" alt="{% blocktranslate with name=s|tr:"master_name" brand=s.brand %}{{ name }} — мастер {{ brand }}{% endblocktranslate %}">
+    </div>{% endif %}
+    <div class="about__text">
+      <p class="eyebrow"><svg class="i"><use href="#tri"/></svg> {% translate "Обо мне" %}</p>
+      <h2>{{ s|tr:"about_title" }}</h2>
+      {{ about_html }}
+      {% if workshop_img %}<img class="about__work" src="{{ workshop_img }}" width="900" height="943" loading="lazy" alt="{% blocktranslate with brand=s.brand %}Мастерская {{ brand }}{% endblocktranslate %}">{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="section__head"><h2>{% translate "Отзывы" %}</h2></div>
+    {% if reviews %}<div class="reviews">
+      {% for r in reviews %}{% with author=r|tr:"author" product=r|tr:"product_name" %}<figure class="review">{% if r.photo_url %}<img src="{{ r.photo_url }}" alt="{% translate "Фото к отзыву" %}: {% firstof product author %}" loading="lazy">{% endif %}<blockquote>{{ r|tr:"text"|linebreaksbr }}</blockquote><figcaption>{{ author }}{% if product %}, {{ product }}{% endif %}{% if r.link %} · <a href="{{ r.link }}" target="_blank" rel="noopener nofollow">{% translate "источник" %}</a>{% endif %}</figcaption></figure>{% endwith %}
+      {% endfor %}
+    </div>{% else %}<div class="reviews-cta"><p>{% blocktranslate with brand=s.brand %}Отзывы покупателей и фото готовых работ — в сообществе мастерской во ВКонтакте. Купили изделие {{ brand }}? Буду рада вашему отзыву!{% endblocktranslate %}</p>
+      {% if s.vk_url %}<a class="btn btn--ghost" href="{{ s.vk_url }}" target="_blank" rel="noopener"><svg class="i"><use href="#vk"/></svg> {% translate "Отзывы во ВКонтакте" %}</a>{% endif %}</div>{% endif %}
+  </div>
+</section>
+
+{% if faqs %}<section class="section section--alt" id="faq">
+  <div class="wrap wrap--narrow">
+    <div class="section__head"><h2>{% translate "Частые вопросы" %}</h2></div>
+    <div class="faq">
+      {% for f in faqs %}<details><summary>{{ f|tr:"question" }}</summary><div>{{ f|tr:"answer"|linebreaks }}</div></details>
+      {% endfor %}
+    </div>
+  </div>
+</section>{% endif %}
+
+<section class="section" id="order">
+  <div class="wrap order">
+    <div class="order__intro">
+      <h2>{% translate "Оставить заявку" %}</h2>
+      <p>{% translate "Напишите, что хотите заказать, — я свяжусь с вами, чтобы обсудить кожу, цвет и детали." %}</p>
+      <p>{% translate "Удобнее сразу в мессенджере?" %}</p>
+      <div class="order__links">
+        {% if s.telegram %}<a class="btn btn--ghost" href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener" data-goal="tg_click"><svg class="i"><use href="#tg"/></svg> Telegram</a>{% endif %}
+        {% if s.whatsapp %}<a class="btn btn--ghost" href="https://wa.me/{{ s.whatsapp_digits }}" target="_blank" rel="noopener" data-goal="wa_click">WhatsApp</a>{% endif %}
+        {% if s.vk_url %}<a class="btn btn--ghost" href="{{ s.vk_url }}" target="_blank" rel="noopener"><svg class="i"><use href="#vk"/></svg> {% translate "ВКонтакте" %}</a>{% endif %}
+      </div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <label>{% translate "Ваше имя" %}<input name="name" required maxlength="80" autocomplete="name"></label>
+      <label>{% translate "Телефон или @ник в Telegram" %}<input name="contact" required maxlength="120" autocomplete="tel" placeholder="{% translate "+7 900 000-00-00 или @nick" %}"></label>
+      <fieldset class="form__how">
+        <legend>{% translate "Как с вами связаться" %}</legend>
+        <label><input type="radio" name="via" value="Telegram" checked> Telegram</label>
+        <label><input type="radio" name="via" value="WhatsApp"> WhatsApp</label>
+        <label><input type="radio" name="via" value="{% translate "Звонок" %}"> {% translate "Звонок" %}</label>
+      </fieldset>
+      <label>{% translate "Изделие" %}
+        <select name="product" id="product">
+          <option value="">— {% translate "выберите или опишите ниже" %} —</option>
+          {% for p in products %}<option>{{ p.label }}</option>
+          {% endfor %}<option>{% translate "Подарочный бокс" %}</option>
+          <option>{% translate "Своя модель" %}</option>
+        </select>
+      </label>
+      <label>{% translate "Пожелания" %}<textarea name="comment" rows="4" maxlength="2000" placeholder="{% translate "Цвет кожи и ниток, размеры, тиснение инициалов, к какой дате нужно…" %}"></textarea></label>
+      <label class="hp" aria-hidden="true">{% translate "Не заполняйте" %}<input name="website" tabindex="-1" autocomplete="off"></label>
+      <label class="form__consent"><input type="checkbox" name="consent" required> <span>{% translate "Согласен(на) на обработку персональных данных по" %} <a href="{{ privacy_url }}" target="_blank">{% translate "политике конфиденциальности" %}</a></span></label>
+      <button class="btn btn--wide" type="submit">{% translate "Отправить заявку" %}</button>
+      <p class="form__msg" id="form-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="footer" id="contacts">
+  <div class="wrap footer__in">
+    <div>
+      {% if logo_img %}<img class="footer__logo" src="{{ logo_img }}" width="120" height="120" loading="lazy" alt="{% translate "Логотип" %} {{ s.brand }}">{% endif %}
+      <p>{% translate "Мастерская кожаных изделий ручной работы" %}{% with city=s|tr:"city" %}{% if city %}<br>{{ city }}{% endif %}{% endwith %}</p>
+    </div>
+    <ul class="contacts">
+      {% if s.phone %}<li><a href="tel:{{ s.phone_raw }}"><svg class="i"><use href="#phone"/></svg>{{ s.phone }}</a></li>{% endif %}
+      {% if s.telegram %}<li><a href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener" data-goal="tg_click"><svg class="i"><use href="#tg"/></svg>@{{ s.telegram }}</a></li>{% endif %}
+      {% if s.vk_url %}<li><a href="{{ s.vk_url }}" target="_blank" rel="noopener"><svg class="i"><use href="#vk"/></svg>{% translate "ВКонтакте" %}</a></li>{% endif %}
+      {% if s.email %}<li><a href="mailto:{{ s.email }}"><svg class="i"><use href="#mail"/></svg>{{ s.email }}</a></li>{% endif %}
+      {% if s.old_site_url %}<li><a href="{{ s.old_site_url }}" target="_blank" rel="noopener"><svg class="i"><use href="#globe"/></svg>{% translate "Старый сайт (Tilda)" %}</a></li>{% endif %}
+    </ul>
+    <p class="footer__small">© {{ year }} {{ s.brand }}{% with name=s|tr:"master_name" %}{% if name %} · {{ name }}{% endif %}{% endwith %} · <a href="{{ privacy_url }}">{% translate "Политика конфиденциальности" %}</a> · <a href="{{ other_url }}" hreflang="{{ other_lang }}" data-lang-switch="{{ other_lang }}">{% if other_lang == "en" %}English{% else %}Русский{% endif %}</a></p>
+  </div>
+</footer>
+
+{% if s.telegram %}<a class="fab" href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener" aria-label="{% translate "Написать в Telegram" %}" data-goal="tg_click"><svg><use href="#tg"/></svg></a>{% endif %}
+
+<dialog class="modal" id="modal" aria-labelledby="m-title">
+  <div class="modal__in">
+    <button class="modal__close" id="m-close" aria-label="{% translate "Закрыть" %}">×</button>
+    <div class="modal__gal">
+      <img id="m-img" src="" alt="">
+      <div class="modal__thumbs" id="m-thumbs"></div>
+    </div>
+    <div class="modal__info">
+      <p class="modal__cat" id="m-cat"></p>
+      <h3 id="m-title"></h3>
+      <p class="modal__price" id="m-price"></p>
+      <ul class="bullets" id="m-desc"></ul>
+      <a class="btn btn--wide" href="#order" id="m-order">{% translate "Заказать" %}</a>
+      {% if s.telegram %}<a class="btn btn--ghost btn--wide" id="m-tg" href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener" data-goal="tg_click"><svg class="i"><use href="#tg"/></svg> {% translate "Спросить в Telegram" %}</a>{% endif %}
+    </div>
+  </div>
+</dialog>
+
+<script id="data" type="application/json">{{ data_json }}</script>
+<script src="{% static 'shop/app.js' %}" defer></script>
+</body>
+</html>

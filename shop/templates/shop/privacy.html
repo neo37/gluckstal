@@ -1,0 +1,25 @@
+{% load static i18n gl %}<!doctype html><html lang="{{ lang }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% translate "Политика конфиденциальности" %} — {{ s.brand }}</title><meta name="robots" content="noindex">
+<link rel="icon" href="{% static 'shop/favicon.svg' %}" type="image/svg+xml"><link rel="stylesheet" href="{% static 'shop/style.css' %}">
+</head><body><main class="section"><div class="wrap wrap--narrow">
+<p><a href="{{ home }}">← {% translate "На главную" %}</a></p>
+<h1 style="font-size:2rem">{% translate "Политика конфиденциальности" %}</h1>
+<p>{% blocktranslate with url=s.site_url %}Настоящая политика описывает, как обрабатываются персональные данные, которые вы оставляете на сайте {{ url }} (далее — Сайт).{% endblocktranslate %}</p>
+<h3>1. {% translate "Оператор" %}</h3>
+<p>{% blocktranslate with name=s|tr:"master_name" brand=s.brand %}Оператор персональных данных — {{ name }}, мастерская {{ brand }}.{% endblocktranslate %}
+{% with city=s|tr:"city" %}{% if city %}{% blocktranslate %}Город: {{ city }}.{% endblocktranslate %}{% endif %}{% endwith %}
+{% translate "Связь" %}: {% if s.email %}<a href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}{% if s.phone %}, {{ s.phone }}{% endif %}.</p>
+<h3>2. {% translate "Какие данные собираются" %}</h3>
+<p>{% translate "Имя, телефон или ник в мессенджере, предпочтительный способ связи и текст пожеланий к заказу — только то, что вы сами указали в форме заявки." %}</p>
+<p>{% translate "Статистика посещений: IP-адрес, тип устройства и браузера (User-Agent), страница, с которой вы пришли, время на сайте и нажатия на кнопки сайта. Эти данные сохраняются на сервере сайта и не содержат ваших имени или контактов." %}</p>
+<p>{% translate "Также Сайт может использовать сервис веб-аналитики Яндекс.Метрика, который собирает обезличенные данные о посещениях (cookie, IP-адрес, сведения о браузере)." %}</p>
+<h3>3. {% translate "Цели обработки" %}</h3>
+<p>{% translate "Связаться с вами по заявке, обсудить и выполнить заказ. Данные статистики используются для улучшения Сайта и защиты от спама." %}</p>
+<h3>4. {% translate "Правовое основание" %}</h3>
+<p>{% translate "Ваше согласие, которое вы даёте, отмечая соответствующий пункт в форме (ст. 6 Федерального закона № 152-ФЗ «О персональных данных»)." %}</p>
+<h3>5. {% translate "Хранение и передача" %}</h3>
+<p>{% translate "Заявка сохраняется на сервере сайта и передаётся мастеру через мессенджер Telegram. Данные не продаются и не передаются третьим лицам, кроме случаев, предусмотренных законом. Заявки хранятся не дольше, чем это нужно для выполнения заказа; статистика посещений — не дольше 12 месяцев." %}</p>
+<h3>6. {% translate "Ваши права" %}</h3>
+<p>{% translate "Вы можете в любой момент запросить уточнение или удаление своих данных и отозвать согласие" %}{% if s.email %}, {% translate "написав на" %} <a href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}.</p>
+<p style="color:var(--ink-2);font-size:.9rem">{% translate "Редакция от" %} {{ date|date:"d.m.Y" }}.</p>
+</div></main></body></html>

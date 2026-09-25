@@ -1,0 +1,116 @@
+{% extends "admin/index.html" %}
+{% load i18n gl %}
+{% block extrastyle %}{{ block.super }}
+<style>
+  .gl-dash { margin-bottom: 20px; }
+  .gl-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .gl-kpi { border: 1px solid var(--hairline-color); border-radius: 8px; padding: 10px 12px; background: var(--body-bg); }
+  .gl-kpi b { display: block; font-size: 22px; line-height: 1.2; color: var(--body-fg); }
+  .gl-kpi span { font-size: 12px; color: var(--body-quiet-color); }
+  .gl-kpi.warn { border-color: #d9822b; }
+  .gl-tabs { display: flex; gap: 6px; margin-bottom: 8px; }
+  .gl-tabs button { border: 1px solid var(--hairline-color); background: var(--body-bg); color: var(--body-fg); border-radius: 99px; padding: 4px 12px; cursor: pointer; }
+  .gl-tabs button[aria-pressed=true] { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .gl-chart { display: flex; align-items: flex-end; gap: 3px; height: 120px; padding: 6px 0; border-bottom: 1px solid var(--hairline-color); }
+  .gl-chart div { flex: 1; position: relative; background: var(--primary); opacity: .75; border-radius: 3px 3px 0 0; min-height: 1px; }
+  .gl-chart div i { position: absolute; left: 0; right: 0; bottom: 0; background: #d9822b; border-radius: 3px 3px 0 0; }
+  .gl-legend { font-size: 12px; color: var(--body-quiet-color); margin: 4px 0 14px; }
+  .gl-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin: 0 4px 0 10px; }
+  .gl-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .gl-table { width: 100%; font-size: 12px; }
+  .gl-table td, .gl-table th { padding: 5px 6px; }
+  .gl-quick { padding: 10px 14px; margin-bottom: 14px; border: 1px solid var(--hairline-color); border-radius: 8px; }
+  @media (max-width: 900px) { .gl-cols { grid-template-columns: 1fr; } }
+</style>
+{% endblock %}
+
+{% block content %}
+{% gl_dashboard as d %}{% gl_settings as s %}
+<div class="gl-dash">
+  <div class="gl-quick">
+    <b>{% translate "Быстрые ссылки" %}:</b>
+    <a href="{% url 'admin:shop_order_changelist' %}">{% translate "Заявки" %}{% if d.new_orders %} ({{ d.new_orders }} {% translate "новых" %}){% endif %}</a> ·
+    <a href="{% url 'admin:shop_sitesettings_changelist' %}">{% translate "Настройки сайта (контакты, «Обо мне», бот, Метрика)" %}</a> ·
+    <a href="{% url 'admin:shop_product_changelist' %}">{% translate "Товары" %}</a> ·
+    <a href="{% url 'admin:shop_review_changelist' %}">{% translate "Отзывы" %}</a>
+    {% if request.user.is_superuser %} · <a href="{% url 'admin:shop_backup' %}">💾 {% translate "Импорт / экспорт базы" %}</a>{% endif %}
+    · <a href="/" target="_blank">{% translate "Открыть сайт" %} ↗</a>
+  </div>
+
+  {% if d.failed_tg %}<p class="errornote">{% blocktranslate count n=d.failed_tg %}{{ n }} новая заявка не дошла до Telegram — она сохранена здесь, в «Заявках».{% plural %}{{ n }} новых заявок не дошли до Telegram — они сохранены здесь, в «Заявках».{% endblocktranslate %}</p>{% endif %}
+
+  <h2 style="margin:0 0 8px">{% translate "Статистика" %}</h2>
+  <div class="gl-tabs" role="tablist">
+    <button type="button" data-p="today" aria-pressed="false">{% translate "Сегодня" %}</button>
+    <button type="button" data-p="week" aria-pressed="true">{% translate "7 дней" %}</button>
+    <button type="button" data-p="month" aria-pressed="false">{% translate "30 дней" %}</button>
+  </div>
+  {% for key, p in d.items %}{% if key == "today" or key == "week" or key == "month" %}
+  <div class="gl-row" data-period="{{ key }}" {% if key != "week" %}hidden{% endif %}>
+    <div class="gl-kpi"><b>{{ p.visits }}</b><span>{% translate "визитов" %}</span></div>
+    <div class="gl-kpi"><b>{{ p.visitors }}</b><span>{% translate "посетителей" %}</span></div>
+    <div class="gl-kpi"><b>{{ p.avg_time }}</b><span>{% translate "среднее время на сайте" %}</span></div>
+    <div class="gl-kpi{% if p.orders %} warn{% endif %}"><b>{{ p.orders }}</b><span>{% translate "заявок" %}</span></div>
+    <div class="gl-kpi"><b>{{ p.conversion }}</b><span>{% translate "конверсия в заявку" %}</span></div>
+    <div class="gl-kpi"><b>{{ p.tg }} / {{ p.wa }}</b><span>{% translate "переходов в Telegram / WhatsApp" %}</span></div>
+    <div class="gl-kpi"><b>{{ p.products }}</b><span>{% translate "открытий карточек товаров" %}</span></div>
+  </div>
+  {% endif %}{% endfor %}
+
+  <div class="gl-chart" aria-label="{% translate 'Визиты и заявки за 30 дней' %}">
+    {% for c in d.chart %}<div style="height:{{ c.h }}%" title="{{ c.date|date:'d.m' }}: {{ c.visits }} {% translate 'визитов' %}, {{ c.orders }} {% translate 'заявок' %}">{% if c.orders %}<i style="height:{{ c.oh }}%"></i>{% endif %}</div>{% endfor %}
+  </div>
+  <div class="gl-legend">{% translate "30 дней" %}: <i style="background:var(--primary)"></i>{% translate "визиты" %} <i style="background:#d9822b"></i>{% translate "заявки" %} · {% translate "визиты администраторов не учитываются" %}</div>
+
+  <div class="gl-cols">
+    <div class="module">
+      <h2>{% translate "Последние заявки" %}</h2>
+      <table class="gl-table">
+        {% for o in d.recent_orders %}<tr><td>{{ o.created|date:"d.m H:i" }}</td><td><a href="{% url 'admin:shop_order_change' o.pk %}">{{ o.name }}</a></td><td>{{ o.product|default:"—" }}</td><td>{{ o.get_status_display }}</td><td>{% if o.telegram == "sent" %}✅{% elif o.telegram == "failed" %}⚠️{% else %}—{% endif %}</td></tr>
+        {% empty %}<tr><td>{% translate "Заявок пока нет." %}</td></tr>{% endfor %}
+      </table>
+    </div>
+    <div class="module">
+      <h2>{% translate "Источники и устройства (30 дней)" %}</h2>
+      <table class="gl-table">
+        {% for x in d.sources %}<tr><td>{{ x.source|default:"—" }}</td><td>{{ x.n }}</td></tr>{% endfor %}
+        {% for x in d.devices %}<tr><td>📱 {{ x.device_type|default:"—" }}</td><td>{{ x.n }}</td></tr>{% endfor %}
+        {% if not d.sources %}<tr><td>{% translate "Данных пока нет." %}</td></tr>{% endif %}
+      </table>
+    </div>
+  </div>
+
+  <div class="module">
+    <h2>{% translate "Последние визиты" %} · <a href="{% url 'admin:shop_visit_changelist' %}" style="color:inherit">{% translate "все" %} →</a></h2>
+    <table class="gl-table">
+      <tr><th>{% translate "Время" %}</th><th>IP</th><th>{% translate "Устройство" %}</th><th>{% translate "На сайте" %}</th><th>{% translate "Просмотры" %}</th><th>{% translate "Источник" %}</th><th>{% translate "Язык" %}</th><th>{% translate "События" %}</th></tr>
+      {% for v in d.recent_visits %}<tr>
+        <td>{{ v.started|date:"d.m H:i" }}</td><td>{{ v.ip|default:"—" }}</td><td title="{{ v.user_agent }}">{{ v.device|default:"—" }}</td>
+        <td>{{ v.duration_label }}</td><td>{{ v.pageviews }}</td><td title="{{ v.referrer }}">{{ v.source }}</td><td>{{ v.lang }}</td>
+        <td>{% for k, n in v.events.items %}{{ k }}×{{ n }} {% endfor %}{% if v.orders.all %}🧾{% endif %}</td>
+      </tr>{% empty %}<tr><td colspan="8">{% translate "Визитов пока нет." %}</td></tr>{% endfor %}
+    </table>
+  </div>
+
+  <div class="gl-quick">
+    <b>{% translate "Вход через Telegram" %}:</b>
+    {% if request.user.telegram %}
+      {% blocktranslate with name=request.user.telegram.username|default:request.user.telegram.telegram_id %}привязан @{{ name }}{% endblocktranslate %}
+      <form action="{% url 'telegram_unlink' %}" method="post" style="display:inline">{% csrf_token %}<button class="button" type="submit">{% translate "Отвязать" %}</button></form>
+    {% elif s.bot_token and s.bot_username %}
+      {% translate "привяжите свой Telegram, чтобы входить без пароля:" %}
+      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="{{ s.bot_username }}" data-size="medium"
+              data-auth-url="{% url 'telegram_link' %}" data-request-access="write"></script>
+    {% else %}
+      {% translate "укажите токен и username бота в настройках сайта, а в @BotFather выполните /setdomain для домена сайта." %}
+    {% endif %}
+  </div>
+</div>
+<script>
+document.querySelectorAll('.gl-tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.gl-tabs button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.querySelectorAll('[data-period]').forEach(r => r.hidden = r.dataset.period !== b.dataset.p);
+}));
+</script>
+{{ block.super }}
+{% endblock %}
