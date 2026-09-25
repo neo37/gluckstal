@@ -6,6 +6,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY manage.py entrypoint.sh ./
 COPY gluckstal ./gluckstal
 COPY shop ./shop
+COPY locale ./locale
 RUN DJANGO_SECRET_KEY=build python manage.py collectstatic --noinput -v0 \
  && useradd -r -u 10001 app && mkdir -p /data && chown app /data && chmod +x entrypoint.sh
 USER app
