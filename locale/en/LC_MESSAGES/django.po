@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 21:34+0700\n"
+"POT-Creation-Date: 2026-09-25 21:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 "should receive orders, open the bot and press Start. 3) Click “Find chats” "
 "at the top → “Add” → “Save”. 4) “Send a test”."
 
-#: shop/admin.py:64 shop/templates/shop/index.html:58
+#: shop/admin.py:64 shop/templates/shop/index.html:59
 msgid "Контакты"
 msgstr "Contacts"
 
@@ -64,8 +64,8 @@ msgstr "Contacts"
 msgid "Первый экран"
 msgstr "Hero section"
 
-#: shop/admin.py:68 shop/templates/shop/index.html:56
-#: shop/templates/shop/index.html:163
+#: shop/admin.py:68 shop/templates/shop/index.html:57
+#: shop/templates/shop/index.html:164
 msgid "Обо мне"
 msgstr "About me"
 
@@ -488,7 +488,7 @@ msgstr "Products"
 msgid "Имя автора"
 msgstr "Author's name"
 
-#: shop/models.py:195 shop/models.py:257 shop/templates/shop/index.html:213
+#: shop/models.py:195 shop/models.py:257 shop/templates/shop/index.html:214
 msgid "Изделие"
 msgstr "Product"
 
@@ -505,7 +505,7 @@ msgid "Отзыв"
 msgstr "Review"
 
 #: shop/models.py:205 shop/templates/admin/gl_index.html:35
-#: shop/templates/shop/index.html:173
+#: shop/templates/shop/index.html:174
 msgid "Отзывы"
 msgstr "Reviews"
 
@@ -541,7 +541,7 @@ msgstr "Question"
 msgid "Ответ"
 msgstr "Answer"
 
-#: shop/models.py:243 shop/templates/shop/index.html:184
+#: shop/models.py:243 shop/templates/shop/index.html:185
 msgid "Частые вопросы"
 msgstr "FAQ"
 
@@ -589,7 +589,7 @@ msgstr "Contact"
 msgid "Связаться через"
 msgstr "Contact via"
 
-#: shop/models.py:258 shop/templates/shop/index.html:221
+#: shop/models.py:258 shop/templates/shop/index.html:222
 msgid "Пожелания"
 msgstr "Wishes"
 
@@ -998,180 +998,180 @@ msgstr "Bot"
 msgid "Ошибка"
 msgstr "Error"
 
-#: shop/templates/shop/index.html:44
+#: shop/templates/shop/index.html:45
 msgid "Перейти к каталогу"
 msgstr "Skip to the catalog"
 
-#: shop/templates/shop/index.html:48
+#: shop/templates/shop/index.html:49
 msgid "на главную"
 msgstr "home"
 
-#: shop/templates/shop/index.html:52
+#: shop/templates/shop/index.html:53
 msgid "Основное меню"
 msgstr "Main menu"
 
-#: shop/templates/shop/index.html:53 shop/templates/shop/index.html:99
+#: shop/templates/shop/index.html:54 shop/templates/shop/index.html:100
 msgid "Изделия"
 msgstr "Products"
 
-#: shop/templates/shop/index.html:54
+#: shop/templates/shop/index.html:55
 msgid "Подарки"
 msgstr "Gifts"
 
-#: shop/templates/shop/index.html:55 shop/templates/shop/index.html:141
+#: shop/templates/shop/index.html:56 shop/templates/shop/index.html:142
 msgid "Как заказать"
 msgstr "How to order"
 
-#: shop/templates/shop/index.html:57
+#: shop/templates/shop/index.html:58
 msgid "Вопросы"
 msgstr "FAQ"
 
-#: shop/templates/shop/index.html:61 shop/templates/shop/index.html:262
+#: shop/templates/shop/index.html:62 shop/templates/shop/index.html:263
 msgid "Заказать"
 msgstr "Order"
 
-#: shop/templates/shop/index.html:62
+#: shop/templates/shop/index.html:63
 msgid "Открыть меню"
 msgstr "Open menu"
 
-#: shop/templates/shop/index.html:74
+#: shop/templates/shop/index.html:75
 msgid "Смотреть изделия"
 msgstr "View products"
 
-#: shop/templates/shop/index.html:75 shop/templates/shop/index.html:248
+#: shop/templates/shop/index.html:76 shop/templates/shop/index.html:249
 msgid "Написать в Telegram"
 msgstr "Message on Telegram"
 
-#: shop/templates/shop/index.html:78
+#: shop/templates/shop/index.html:79
 msgid "моделей в каталоге"
 msgstr "designs in the catalog"
 
-#: shop/templates/shop/index.html:79 shop/views.py:42 shop/views.py:82
+#: shop/templates/shop/index.html:80 shop/views.py:42 shop/views.py:82
 msgid "от"
 msgstr "from"
 
-#: shop/templates/shop/index.html:79
+#: shop/templates/shop/index.html:80
 msgid "цены на изделия"
 msgstr "product prices"
 
-#: shop/templates/shop/index.html:80
+#: shop/templates/shop/index.html:81
 msgid "натуральная кожа, ручной шов"
 msgstr "genuine leather, hand-stitched"
 
-#: shop/templates/shop/index.html:84
+#: shop/templates/shop/index.html:85
 #, python-format
 msgid "Изделия мастерской %(brand)s из натуральной кожи"
 msgstr "Genuine leather goods by the %(brand)s workshop"
 
-#: shop/templates/shop/index.html:89
+#: shop/templates/shop/index.html:90
 #, python-format
 msgid "Почему %(brand)s"
 msgstr "Why %(brand)s"
 
-#: shop/templates/shop/index.html:100
+#: shop/templates/shop/index.html:101
 msgid "Цены — за базовую модель. Цвет, размер и детали обсуждаем при заказе."
 msgstr ""
 "Prices are for the base design. Colour, size and details are agreed when "
 "ordering."
 
-#: shop/templates/shop/index.html:102
+#: shop/templates/shop/index.html:103
 msgid "Фильтр по категориям"
 msgstr "Filter by category"
 
-#: shop/templates/shop/index.html:103
+#: shop/templates/shop/index.html:104
 msgid "Все"
 msgstr "All"
 
-#: shop/templates/shop/index.html:105 shop/templates/shop/index.html:131
+#: shop/templates/shop/index.html:106 shop/templates/shop/index.html:132
 msgid "До"
 msgstr "Under"
 
-#: shop/templates/shop/index.html:109
+#: shop/templates/shop/index.html:110
 msgid "подробнее"
 msgstr "details"
 
-#: shop/templates/shop/index.html:110
+#: shop/templates/shop/index.html:111
 #, python-format
 msgid "%(name)s из натуральной кожи ручной работы"
 msgstr "%(name)s, handmade from genuine leather"
 
-#: shop/templates/shop/index.html:115 shop/views.py:86
+#: shop/templates/shop/index.html:116 shop/views.py:86
 msgid "фото и описание"
 msgstr "photos and description"
 
-#: shop/templates/shop/index.html:115
+#: shop/templates/shop/index.html:116
 msgid "Подробнее"
 msgstr "Details"
 
-#: shop/templates/shop/index.html:120
+#: shop/templates/shop/index.html:121
 msgid "В этой подборке пока ничего нет."
 msgstr "Nothing in this selection yet."
 
-#: shop/templates/shop/index.html:127
+#: shop/templates/shop/index.html:128
 msgid "Идеи подарков"
 msgstr "Gift ideas"
 
-#: shop/templates/shop/index.html:128
+#: shop/templates/shop/index.html:129
 msgid "Кожаная вещь ручной работы — подарок, которым пользуются каждый день."
 msgstr "A handmade leather piece is a gift that gets used every day."
 
-#: shop/templates/shop/index.html:131
+#: shop/templates/shop/index.html:132
 msgid "Недорогие подарки из каталога"
 msgstr "Affordable gifts from the catalog"
 
-#: shop/templates/shop/index.html:132
+#: shop/templates/shop/index.html:133
 msgid "Мужчине"
 msgstr "For him"
 
-#: shop/templates/shop/index.html:132
+#: shop/templates/shop/index.html:133
 msgid "Портмоне, ремни, аксессуары для документов"
 msgstr "Wallets, belts, document holders"
 
-#: shop/templates/shop/index.html:133
+#: shop/templates/shop/index.html:134
 msgid "Женщине"
 msgstr "For her"
 
-#: shop/templates/shop/index.html:133
+#: shop/templates/shop/index.html:134
 msgid "Сумки, клатчи, чехлы и аксессуары"
 msgstr "Bags, clutches, cases and accessories"
 
-#: shop/templates/shop/index.html:134 shop/templates/shop/index.html:217
+#: shop/templates/shop/index.html:135 shop/templates/shop/index.html:218
 msgid "Подарочный бокс"
 msgstr "Gift box"
 
-#: shop/templates/shop/index.html:134
+#: shop/templates/shop/index.html:135
 msgid "Набор изделий в одном стиле. Наполнение собираем вместе под человека."
 msgstr ""
 "A set of pieces in one style. We choose the contents together for the "
 "person."
 
-#: shop/templates/shop/index.html:151 shop/templates/shop/index.html:218
+#: shop/templates/shop/index.html:152 shop/templates/shop/index.html:219
 msgid "Своя модель"
 msgstr "Custom design"
 
-#: shop/templates/shop/index.html:151
+#: shop/templates/shop/index.html:152
 msgid "Обсудить свою идею"
 msgstr "Discuss your idea"
 
-#: shop/templates/shop/index.html:160
+#: shop/templates/shop/index.html:161
 #, python-format
 msgid "%(name)s — мастер %(brand)s"
 msgstr "%(name)s — the maker behind %(brand)s"
 
-#: shop/templates/shop/index.html:166
+#: shop/templates/shop/index.html:167
 #, python-format
 msgid "Мастерская %(brand)s"
 msgstr "The %(brand)s workshop"
 
-#: shop/templates/shop/index.html:175
+#: shop/templates/shop/index.html:176
 msgid "Фото к отзыву"
 msgstr "Review photo"
 
-#: shop/templates/shop/index.html:175
+#: shop/templates/shop/index.html:176
 msgid "источник"
 msgstr "source"
 
-#: shop/templates/shop/index.html:177
+#: shop/templates/shop/index.html:178
 #, python-format
 msgid ""
 "Отзывы покупателей и фото готовых работ — в сообществе мастерской во "
@@ -1180,15 +1180,15 @@ msgstr ""
 "Customer reviews and photos of finished pieces are in the workshop's VK "
 "community. Bought something from %(brand)s? I'd love to hear from you!"
 
-#: shop/templates/shop/index.html:178
+#: shop/templates/shop/index.html:179
 msgid "Отзывы во ВКонтакте"
 msgstr "Reviews on VK"
 
-#: shop/templates/shop/index.html:195
+#: shop/templates/shop/index.html:196
 msgid "Оставить заявку"
 msgstr "Place an order"
 
-#: shop/templates/shop/index.html:196
+#: shop/templates/shop/index.html:197
 msgid ""
 "Напишите, что хотите заказать, — я свяжусь с вами, чтобы обсудить кожу, цвет"
 " и детали."
@@ -1196,81 +1196,85 @@ msgstr ""
 "Tell me what you'd like to order and I'll get in touch to discuss the "
 "leather, colour and details."
 
-#: shop/templates/shop/index.html:197
+#: shop/templates/shop/index.html:198
 msgid "Удобнее сразу в мессенджере?"
 msgstr "Prefer a messenger?"
 
-#: shop/templates/shop/index.html:201 shop/templates/shop/index.html:240
+#: shop/templates/shop/index.html:202 shop/templates/shop/index.html:241
 msgid "ВКонтакте"
 msgstr "VK"
 
-#: shop/templates/shop/index.html:205
+#: shop/templates/shop/index.html:206
 msgid "Ваше имя"
 msgstr "Your name"
 
-#: shop/templates/shop/index.html:206
+#: shop/templates/shop/index.html:207
 msgid "Телефон или @ник в Telegram"
 msgstr "Phone or Telegram @username"
 
-#: shop/templates/shop/index.html:206
+#: shop/templates/shop/index.html:207
 msgid "+7 900 000-00-00 или @nick"
 msgstr "+44 7700 900000 or @username"
 
-#: shop/templates/shop/index.html:208
+#: shop/templates/shop/index.html:209
 msgid "Как с вами связаться"
 msgstr "How should I contact you"
 
-#: shop/templates/shop/index.html:211
+#: shop/templates/shop/index.html:212
 msgid "Звонок"
 msgstr "Phone call"
 
-#: shop/templates/shop/index.html:215
+#: shop/templates/shop/index.html:216
 msgid "выберите или опишите ниже"
 msgstr "choose or describe below"
 
-#: shop/templates/shop/index.html:221
+#: shop/templates/shop/index.html:222
 msgid "Цвет кожи и ниток, размеры, тиснение инициалов, к какой дате нужно…"
 msgstr ""
 "Leather and thread colour, sizes, embossed initials, when you need it…"
 
-#: shop/templates/shop/index.html:222
+#: shop/templates/shop/index.html:223
 msgid "Не заполняйте"
 msgstr "Leave empty"
 
-#: shop/templates/shop/index.html:223
+#: shop/templates/shop/index.html:224
 msgid "Согласен(на) на обработку персональных данных по"
 msgstr "I agree to the processing of my personal data under the"
 
-#: shop/templates/shop/index.html:223
+#: shop/templates/shop/index.html:224
 msgid "политике конфиденциальности"
 msgstr "privacy policy"
 
-#: shop/templates/shop/index.html:224
+#: shop/templates/shop/index.html:225
 msgid "Отправить заявку"
 msgstr "Send the order"
 
-#: shop/templates/shop/index.html:234
+#: shop/templates/shop/index.html:235
 msgid "Логотип"
 msgstr "Logo"
 
-#: shop/templates/shop/index.html:235
+#: shop/templates/shop/index.html:236
 msgid "Мастерская кожаных изделий ручной работы"
 msgstr "Handmade leather goods workshop"
 
-#: shop/templates/shop/index.html:242
+#: shop/templates/shop/index.html:243
 msgid "Старый сайт (Tilda)"
 msgstr "Old website (Tilda)"
 
-#: shop/templates/shop/index.html:244 shop/templates/shop/privacy.html:2
+#: shop/templates/shop/index.html:245 shop/templates/shop/privacy.html:2
 #: shop/templates/shop/privacy.html:6
 msgid "Политика конфиденциальности"
 msgstr "Privacy policy"
 
-#: shop/templates/shop/index.html:252
+#: shop/templates/shop/index.html:245
+msgid "Исходный код сайта на GitHub"
+msgstr "Site source code on GitHub"
+
+#: shop/templates/shop/index.html:253
 msgid "Закрыть"
 msgstr "Close"
 
-#: shop/templates/shop/index.html:263
+#: shop/templates/shop/index.html:264
 msgid "Спросить в Telegram"
 msgstr "Ask on Telegram"
 

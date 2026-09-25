@@ -183,6 +183,8 @@ h3 { font-size: 1.25rem; }
 .contacts .i { color: var(--tan); }
 .footer__small { grid-column: 1 / -1; font-size: .85rem; margin: 16px 0 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); }
 .footer__small a { color: #d8c8b4; }
+.footer__gh { display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
+.footer__gh:hover { color: #fff; }
 
 /* floating telegram */
 .fab { position: fixed; right: 16px; bottom: 16px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: #2aabee; color: #fff;
