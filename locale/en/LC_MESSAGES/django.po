@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 21:24+0700\n"
+"POT-Creation-Date: 2026-09-25 21:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,67 @@ msgstr "GLÜCKSTAL — site management"
 #: gluckstal/urls.py:13
 msgid "Контент и настройки"
 msgstr "Content and settings"
+
+#: shop/admin.py:31 shop/models.py:89
+msgid "Токен Telegram-бота"
+msgstr "Telegram bot token"
+
+#: shop/admin.py:33
+msgid ""
+"Из @BotFather. Сохранённый токен не показывается: оставьте поле пустым, "
+"чтобы не менять."
+msgstr ""
+"From @BotFather. The saved token is never shown: leave the field empty to "
+"keep it."
+
+#: shop/admin.py:34
+msgid "Удалить сохранённый токен"
+msgstr "Delete the saved token"
+
+#: shop/admin.py:59
+msgid "Заявки в Telegram"
+msgstr "Orders to Telegram"
+
+#: shop/admin.py:61
+msgid ""
+"1) Создайте бота в @BotFather и вставьте токен. 2) С аккаунта, куда нужны "
+"заявки, откройте бота и нажмите Start. 3) Нажмите «Найти чаты» вверху → "
+"«Добавить» → «Сохранить». 4) «Отправить тест»."
+msgstr ""
+"1) Create a bot in @BotFather and paste its token. 2) From the account that "
+"should receive orders, open the bot and press Start. 3) Click “Find chats” "
+"at the top → “Add” → “Save”. 4) “Send a test”."
+
+#: shop/admin.py:64 shop/templates/shop/index.html:58
+msgid "Контакты"
+msgstr "Contacts"
+
+#: shop/admin.py:66
+msgid "Первый экран"
+msgstr "Hero section"
+
+#: shop/admin.py:68 shop/templates/shop/index.html:56
+#: shop/templates/shop/index.html:163
+msgid "Обо мне"
+msgstr "About me"
+
+#: shop/admin.py:70
+msgid "Блок «Своя модель»"
+msgstr "“Custom design” block"
+
+#: shop/admin.py:72
+msgid "Поиск и аналитика"
+msgstr "Search and analytics"
+
+#: shop/admin.py:74
+msgid ""
+"Метрика: создайте счётчик на metrika.yandex.ru и вставьте номер. Цели "
+"(JavaScript-событие): order_sent, order_click, tg_click, wa_click, "
+"product_open, cta_header."
+msgstr ""
+"Metrica: create a counter at metrika.yandex.ru and paste its ID. Goals "
+"(JavaScript event): order_sent, order_click, tg_click, wa_click, "
+"product_open, cta_header."
 
 #: shop/admin.py:106 shop/admin.py:121
 msgid "Сначала сохраните токен бота"
@@ -69,6 +130,51 @@ msgstr "The previous state was saved as %s. Log in again if asked."
 #: shop/admin.py:151 shop/templates/admin/shop/backup.html:3
 msgid "Резервная копия сайта"
 msgstr "Site backup"
+
+#: shop/admin.py:179
+msgid "Товаров"
+msgstr "Products"
+
+#: shop/admin.py:207
+msgid "Подборки подарков"
+msgstr "Gift selections"
+
+#: shop/admin.py:212 shop/admin.py:243 shop/models.py:177 shop/models.py:181
+#: shop/models.py:199 shop/views.py:86
+msgid "Фото"
+msgstr "Photo"
+
+#: shop/admin.py:221
+msgid "Показать на сайте"
+msgstr "Show on the site"
+
+#: shop/admin.py:227
+msgid "Скрыть с сайта"
+msgstr "Hide from the site"
+
+#: shop/admin.py:247 shop/models.py:222
+msgid "Текст"
+msgstr "Text"
+
+#: shop/admin.py:283 shop/models.py:264
+msgid "Telegram"
+msgstr "Telegram"
+
+#: shop/admin.py:288 shop/models.py:261 shop/models.py:297
+msgid "Визит"
+msgstr "Visit"
+
+#: shop/admin.py:312
+msgid "Время на сайте"
+msgstr "Time on site"
+
+#: shop/admin.py:316 shop/models.py:293 shop/templates/admin/gl_index.html:86
+msgid "События"
+msgstr "Events"
+
+#: shop/admin.py:320 shop/models.py:269
+msgid "Заявка"
+msgstr "Order"
 
 #: shop/admin.py:350
 msgid "Вход через Telegram не удался: подпись неверна или устарела."
@@ -266,10 +372,6 @@ msgstr "Yandex Metrica counter ID"
 msgid "Только цифры"
 msgstr "Digits only"
 
-#: shop/models.py:89
-msgid "Токен Telegram-бота"
-msgstr "Telegram bot token"
-
 #: shop/models.py:90
 msgid "Формат 123456789:AA…"
 msgstr "Format 123456789:AA…"
@@ -382,10 +484,6 @@ msgstr "Product"
 msgid "Товары"
 msgstr "Products"
 
-#: shop/models.py:177 shop/models.py:181 shop/models.py:199 shop/views.py:86
-msgid "Фото"
-msgstr "Photo"
-
 #: shop/models.py:193
 msgid "Имя автора"
 msgstr "Author's name"
@@ -426,10 +524,6 @@ msgstr "Block"
 #: shop/models.py:220
 msgid "Заголовок"
 msgstr "Heading"
-
-#: shop/models.py:222
-msgid "Текст"
-msgstr "Text"
 
 #: shop/models.py:227
 msgid "Карточка блока"
@@ -507,25 +601,13 @@ msgstr "Site language"
 msgid "IP"
 msgstr "IP"
 
-#: shop/models.py:261 shop/models.py:297
-msgid "Визит"
-msgstr "Visit"
-
 #: shop/models.py:263
 msgid "Статус"
 msgstr "Status"
 
-#: shop/models.py:264
-msgid "Telegram"
-msgstr "Telegram"
-
 #: shop/models.py:266
 msgid "Заметка"
 msgstr "Note"
-
-#: shop/models.py:269
-msgid "Заявка"
-msgstr "Order"
 
 #: shop/models.py:269 shop/templates/admin/gl_index.html:32
 msgid "Заявки"
@@ -583,10 +665,6 @@ msgstr "Screen"
 msgid "Просмотры"
 msgstr "Page views"
 
-#: shop/models.py:293 shop/templates/admin/gl_index.html:86
-msgid "События"
-msgstr "Events"
-
 #: shop/models.py:294
 msgid "Администратор"
 msgstr "Administrator"
@@ -627,17 +705,17 @@ msgstr "Telegram account"
 msgid "Telegram-аккаунты"
 msgstr "Telegram accounts"
 
-#: shop/telegram.py:34
+#: shop/telegram.py:37
 #, python-format
 msgid "нет связи с Telegram (%s)"
 msgstr "cannot reach Telegram (%s)"
 
-#: shop/telegram.py:50
+#: shop/telegram.py:53
 #, python-format
 msgid "Telegram не принял токен: %s"
 msgstr "Telegram rejected the token: %s"
 
-#: shop/telegram.py:94
+#: shop/telegram.py:97
 msgid "Новая заявка с сайта GLÜCKSTAL"
 msgstr "New order from the GLÜCKSTAL website"
 
@@ -944,17 +1022,9 @@ msgstr "Gifts"
 msgid "Как заказать"
 msgstr "How to order"
 
-#: shop/templates/shop/index.html:56 shop/templates/shop/index.html:163
-msgid "Обо мне"
-msgstr "About me"
-
 #: shop/templates/shop/index.html:57
 msgid "Вопросы"
 msgstr "FAQ"
-
-#: shop/templates/shop/index.html:58
-msgid "Контакты"
-msgstr "Contacts"
 
 #: shop/templates/shop/index.html:61 shop/templates/shop/index.html:262
 msgid "Заказать"

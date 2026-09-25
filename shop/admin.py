@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
-from django.utils.translation import gettext_lazy as _l
+from django.utils.translation import gettext_lazy
 
 from . import backup, telegram
 from .images import variant_url
@@ -28,10 +28,10 @@ def thumb(field, size=64):
 # ================================================================ site settings (single row)
 class SiteSettingsForm(forms.ModelForm):
     bot_token = forms.CharField(
-        label=_l("Токен Telegram-бота"), required=False,
+        label=gettext_lazy("Токен Telegram-бота"), required=False,
         widget=forms.PasswordInput(render_value=False, attrs={"autocomplete": "off", "placeholder": "123456789:AA…"}),
-        help_text=_l("Из @BotFather. Сохранённый токен не показывается: оставьте поле пустым, чтобы не менять."))
-    clear_token = forms.BooleanField(label=_l("Удалить сохранённый токен"), required=False)
+        help_text=gettext_lazy("Из @BotFather. Сохранённый токен не показывается: оставьте поле пустым, чтобы не менять."))
+    clear_token = forms.BooleanField(label=gettext_lazy("Удалить сохранённый токен"), required=False)
 
     class Meta:
         model = SiteSettings
@@ -56,22 +56,22 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsForm
     change_form_template = "admin/shop/sitesettings/change_form.html"
     fieldsets = [
-        (_l("Заявки в Telegram"), {
+        (gettext_lazy("Заявки в Telegram"), {
             "fields": ["bot_token", "clear_token", "chat_ids", "bot_username", "telegram_api_url"],
-            "description": _l("1) Создайте бота в @BotFather и вставьте токен. 2) С аккаунта, куда нужны заявки, откройте "
+            "description": gettext_lazy("1) Создайте бота в @BotFather и вставьте токен. 2) С аккаунта, куда нужны заявки, откройте "
                               "бота и нажмите Start. 3) Нажмите «Найти чаты» вверху → «Добавить» → «Сохранить». "
                               "4) «Отправить тест».")}),
-        (_l("Контакты"), {"fields": ["brand", ("master_name", "master_name_en"), ("city", "city_en"), "phone", "email",
+        (gettext_lazy("Контакты"), {"fields": ["brand", ("master_name", "master_name_en"), ("city", "city_en"), "phone", "email",
                                      "telegram", "vk_url", "whatsapp", "old_site_url"]}),
-        (_l("Первый экран"), {"fields": [("hero_eyebrow", "hero_eyebrow_en"), ("hero_title", "hero_title_en"),
+        (gettext_lazy("Первый экран"), {"fields": [("hero_eyebrow", "hero_eyebrow_en"), ("hero_title", "hero_title_en"),
                                          ("hero_lead", "hero_lead_en"), "hero_image", "logo"]}),
-        (_l("Обо мне"), {"fields": [("about_title", "about_title_en"), ("about_text", "about_text_en"),
+        (gettext_lazy("Обо мне"), {"fields": [("about_title", "about_title_en"), ("about_text", "about_text_en"),
                                     "about_photo", "workshop_photo"]}),
-        (_l("Блок «Своя модель»"), {"fields": [("custom_title", "custom_title_en"), ("custom_text", "custom_text_en"),
+        (gettext_lazy("Блок «Своя модель»"), {"fields": [("custom_title", "custom_title_en"), ("custom_text", "custom_text_en"),
                                                "custom_photo"]}),
-        (_l("Поиск и аналитика"), {
+        (gettext_lazy("Поиск и аналитика"), {
             "fields": ["site_url", ("seo_title", "seo_title_en"), ("seo_description", "seo_description_en"), "metrika_id"],
-            "description": _l("Метрика: создайте счётчик на metrika.yandex.ru и вставьте номер. Цели (JavaScript-событие): "
+            "description": gettext_lazy("Метрика: создайте счётчик на metrika.yandex.ru и вставьте номер. Цели (JavaScript-событие): "
                               "order_sent, order_click, tg_click, wa_click, product_open, cta_header.")}),
     ]
 
@@ -176,7 +176,7 @@ class CategoryAdmin(admin.ModelAdmin):
     fields = [("name", "name_en"), "slug", "order"]
     prepopulated_fields = {"slug": ["name"]}
 
-    @admin.display(description=_l("Товаров"))
+    @admin.display(description=gettext_lazy("Товаров"))
     def count(self, obj):
         return obj.products.count()
 
@@ -204,12 +204,12 @@ class ProductAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {"fields": [("name", "name_en"), "slug", "category", ("price", "price_from"),
                            ("description", "description_en"), "visible", "order"]}),
-        (_l("Подборки подарков"), {"fields": [("for_him", "for_her")]}),
+        (gettext_lazy("Подборки подарков"), {"fields": [("for_him", "for_her")]}),
     ]
     save_on_top = True
     actions = ["make_visible", "make_hidden"]
 
-    @admin.display(description=_l("Фото"))
+    @admin.display(description=gettext_lazy("Фото"))
     def cover(self, obj):
         img = obj.images.first()
         return thumb(img.image if img else None, 48)
@@ -218,13 +218,13 @@ class ProductAdmin(admin.ModelAdmin):
     def has_en(self, obj):
         return bool(obj.name_en and obj.description_en)
 
-    @admin.action(description=_l("Показать на сайте"))
+    @admin.action(description=gettext_lazy("Показать на сайте"))
     def make_visible(self, request, qs):
         for p in qs:
             p.visible = True
             p.save()
 
-    @admin.action(description=_l("Скрыть с сайта"))
+    @admin.action(description=gettext_lazy("Скрыть с сайта"))
     def make_hidden(self, request, qs):
         for p in qs:
             p.visible = False
@@ -240,11 +240,11 @@ class ReviewAdmin(admin.ModelAdmin):
     fields = [("author", "author_en"), ("product_name", "product_name_en"), ("text", "text_en"), "photo", "link",
               "visible", "order"]
 
-    @admin.display(description=_l("Фото"))
+    @admin.display(description=gettext_lazy("Фото"))
     def preview(self, obj):
         return thumb(obj.photo, 48)
 
-    @admin.display(description=_l("Текст"))
+    @admin.display(description=gettext_lazy("Текст"))
     def short(self, obj):
         return obj.text[:80] + ("…" if len(obj.text) > 80 else "")
 
@@ -280,12 +280,12 @@ class OrderAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-    @admin.display(description=_l("Telegram"))
+    @admin.display(description=gettext_lazy("Telegram"))
     def tg_state(self, obj):
         icon = {"sent": "✅", "failed": "⚠️", "off": "—"}[obj.telegram]
         return format_html('<span title="{}">{} {}</span>', obj.telegram_error, icon, obj.get_telegram_display())
 
-    @admin.display(description=_l("Визит"))
+    @admin.display(description=gettext_lazy("Визит"))
     def visit_link(self, obj):
         if not obj.visit_id:
             return "—"
@@ -309,15 +309,15 @@ class VisitAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related("orders")
 
-    @admin.display(description=_l("Время на сайте"), ordering="active_seconds")
+    @admin.display(description=gettext_lazy("Время на сайте"), ordering="active_seconds")
     def duration(self, obj):
         return obj.duration_label
 
-    @admin.display(description=_l("События"))
+    @admin.display(description=gettext_lazy("События"))
     def events_short(self, obj):
         return ", ".join(f"{k}×{v}" for k, v in (obj.events or {}).items()) or "—"
 
-    @admin.display(description=_l("Заявка"), boolean=True)
+    @admin.display(description=gettext_lazy("Заявка"), boolean=True)
     def ordered(self, obj):
         return bool(obj.orders.all())
 

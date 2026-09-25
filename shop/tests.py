@@ -4,6 +4,7 @@ the Telegram bot integration, the order form, backup import/export and access co
 Run:  DATA_DIR=$(mktemp -d) python manage.py test shop
 """
 import io
+import re
 import json
 import shutil
 import sqlite3
@@ -516,3 +517,269 @@ class TelegramRobustnessTests(TestCase):
         r = telegram.call(TOKEN, "getMe")
         self.assertFalse(r["ok"])
         self.assertIn("Network is unreachable", r["description"])
+
+
+# =============================================================== English version
+CYRILLIC = re.compile(r"[А-Яа-яЁё]")
+
+
+def strip_lang_switch(html):
+    """The language switch shows «Русский» on purpose — drop it before looking for untranslated text."""
+    html = re.sub(r"<(a|button)[^>]*(data-lang-switch|lang=\"ru\"|value=\"ru\")[^>]*>.*?</\1>", "", html, flags=re.S)
+    return re.sub(r'title="Русская версия"', "", html)
+
+
+def cyrillic_snippets(html):
+    return [html[max(0, m.start() - 60):m.end() + 60] for m in CYRILLIC.finditer(html)][:5]
+
+
+class EnglishVersionTests(AdminMixin, TestCase):
+    def fill_bilingual_content(self):
+        s = SiteSettings.load()
+        for f in ("master_name", "city", "seo_title", "seo_description", "hero_eyebrow", "hero_title", "hero_lead",
+                  "about_title", "about_text", "custom_title", "custom_text"):
+            setattr(s, f, f"Русский текст {f}")
+            setattr(s, f + "_en", f"English text {f}")
+        s.telegram, s.vk_url, s.whatsapp, s.phone, s.email = "gl_test", "https://vk.com/gl", "+79130001122", "+7 913 000-11-22", "a@b.co"
+        s.old_site_url, s.metrika_id = "https://gluckstal.tilda.ws/gluckstal", "123"
+        s.save()
+        cat = Category.objects.create(name="Кошельки", name_en="Wallets", slug="wallets")
+        p = Product.objects.create(name="Бумажник", name_en="Travel wallet", slug="bumazhnik", category=cat, price=6500,
+                                   price_from=True, description="Пункт\nДругой", description_en="Point\nAnother", for_him=True)
+        ProductImage.objects.create(product=p, image=png())
+        Product.objects.create(name="Клатч", name_en="Clutch", slug="clutch", category=cat, price=1500,
+                               description="Клатч", description_en="Clutch bag", for_her=True)
+        InfoCard.objects.create(kind="perk", title="Кожа", title_en="Leather", text="Текст", text_en="Text")
+        InfoCard.objects.create(kind="step", title="Шаг", title_en="Step", text="Текст", text_en="Text")
+        Faq.objects.create(question="Вопрос?", question_en="Question?", answer="Ответ", answer_en="Answer")
+        Review.objects.create(author="Анна", author_en="Anna", product_name="Бумажник", product_name_en="Travel wallet",
+                              text="Супер", text_en="Great")
+
+    def test_english_page_has_no_russian_left(self):
+        self.fill_bilingual_content()
+        cache.clear()
+        html = Client().get("/en/").content.decode()
+        self.assertIn('<html lang="en">', html)
+        for text in ("English text hero_title", "Travel wallet", "from 6,500 ₽", "Wallets", "Question?", "Anna",
+                     "Great", "Leather", "Step", "Old website (Tilda)", "Privacy policy", 'hreflang="ru"',
+                     '"numLocale":"en-US"', "/en/privacy.html"):
+            self.assertIn(text, html, text)
+        rest = strip_lang_switch(html)
+        self.assertEqual(cyrillic_snippets(rest), [])
+
+    def test_russian_page_stays_russian_and_links_english(self):
+        self.fill_bilingual_content()
+        cache.clear()
+        html = Client().get("/").content.decode()
+        self.assertIn('<html lang="ru">', html)
+        self.assertIn("Русский текст hero_title", html)
+        self.assertIn('href="/en/"', html)
+        self.assertNotIn("English text hero_title", html)
+
+    def test_fallback_to_russian_when_translation_missing(self):
+        cat = Category.objects.create(name="Сумки", slug="bags")
+        Product.objects.create(name="Шопер", slug="shopper", category=cat, price=8000, description="Большой")
+        cache.clear()
+        html = Client().get("/en/").content.decode()
+        self.assertIn("Шопер", html)  # no English name yet -> Russian is shown instead of an empty card
+
+    def test_english_privacy_page(self):
+        self.fill_bilingual_content()
+        html = Client().get("/en/privacy.html").content.decode()
+        self.assertIn("Privacy policy", html)
+        self.assertIn("English text master_name", html)
+        self.assertEqual(cyrillic_snippets(strip_lang_switch(html)), [])
+
+    def test_sitemap_lists_both_languages(self):
+        xml = Client().get("/sitemap.xml").content.decode()
+        self.assertIn("https://gluckstal.store/</loc>", xml)
+        self.assertIn("https://gluckstal.store/en/</loc>", xml)
+
+    def test_admin_in_english_has_no_russian_left(self):
+        self.client.cookies[settings.LANGUAGE_COOKIE_NAME] = "en"
+        urls = [reverse("admin:index"), reverse("admin:shop_sitesettings_change", args=[SiteSettings.load().pk]),
+                reverse("admin:shop_backup")]
+        for model in ("product", "category", "review", "faq", "infocard"):
+            urls += [reverse(f"admin:shop_{model}_add"), reverse(f"admin:shop_{model}_changelist")]
+        urls += [reverse("admin:shop_order_changelist"), reverse("admin:shop_visit_changelist"),
+                 reverse("admin:shop_telegramaccount_changelist")]
+        for url in urls:
+            r = self.client.get(url)
+            self.assertEqual(r.status_code, 200, url)
+            self.assertEqual(cyrillic_snippets(strip_lang_switch(r.content.decode())), [], url)  # noqa
+
+    def test_admin_login_page_in_english(self):
+        c = Client()
+        c.cookies[settings.LANGUAGE_COOKIE_NAME] = "en"
+        html = c.get(reverse("admin:login")).content.decode()
+        self.assertIn("Log in", html)
+        self.assertEqual(cyrillic_snippets(strip_lang_switch(html)), [])
+
+    def test_language_switch_endpoint(self):
+        r = Client().post("/i18n/setlang/", {"language": "en", "next": "/admin/"})
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(r.cookies[settings.LANGUAGE_COOKIE_NAME].value, "en")
+
+    def test_import_translations_command(self):
+        cat = Category.objects.create(name="Кошельки", slug="wallets")
+        Product.objects.create(name="Бумажник", slug="bumazhnik", category=cat, price=1, description="А")
+        Faq.objects.create(question="Вопрос?", answer="Ответ")
+        root = self._tmp / "c"
+        root.mkdir()
+        (root / "content.json").write_text(json.dumps({
+            "settings": {"hero_title_en": "Handmade", "hero_title": "не трогать"},
+            "categories": [{"slug": "wallets", "name": "Кошельки", "name_en": "Wallets"}],
+            "products": [{"slug": "bumazhnik", "name_en": "Travel wallet", "desc_en": ["One", "Two"]}],
+            "faq": [{"q": "Вопрос?", "q_en": "Question?", "a_en": "Answer"}]}), encoding="utf-8")
+        call_command("import_content", str(root), "--translations", stdout=io.StringIO())
+        p = Product.objects.get()
+        self.assertEqual((p.name, p.name_en, p.description_en), ("Бумажник", "Travel wallet", "One\nTwo"))
+        self.assertEqual(Category.objects.get().name_en, "Wallets")
+        self.assertEqual(Faq.objects.get().answer_en, "Answer")
+        self.assertEqual(SiteSettings.load().hero_title_en, "Handmade")
+        self.assertEqual(SiteSettings.load().hero_title, "")  # Russian fields untouched
+
+
+# =============================================================== Telegram login
+def signed(data, token=TOKEN):
+    import hashlib
+    import hmac
+    check = "\n".join(f"{k}={data[k]}" for k in sorted(data))
+    return {**data, "hash": hmac.new(hashlib.sha256(token.encode()).digest(), check.encode(), hashlib.sha256).hexdigest()}
+
+
+class TelegramLoginTests(MediaTmpMixin, TestCase):
+    def setUp(self):
+        super().setUp()
+        s = SiteSettings.load()
+        s.bot_token, s.bot_username = TOKEN, "gl_bot"
+        s.save()
+        self.user = get_user_model().objects.create_superuser("owner", password="test-only-password-123")
+
+    def widget(self, **extra):
+        import time as _t
+        return signed({"id": "777", "first_name": "Kira", "username": "kira_tg", "auth_date": str(int(_t.time())), **extra})
+
+    def test_login_page_shows_widget(self):
+        html = Client().get(reverse("admin:login")).content.decode()
+        self.assertIn('data-telegram-login="gl_bot"', html)
+        self.assertIn(reverse("telegram_login"), html)
+
+    def test_link_then_login(self):
+        c = Client()
+        c.force_login(self.user)
+        r = c.get(reverse("telegram_link"), self.widget())
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(TelegramAccount.objects.get().telegram_id, 777)
+        anon = Client()
+        r = anon.get(reverse("telegram_login"), {**self.widget(), "next": "/admin/shop/order/"})
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(r["Location"], "/admin/shop/order/")
+        self.assertEqual(anon.get(reverse("admin:index")).status_code, 200)  # logged in
+        self.assertIsNotNone(TelegramAccount.objects.get().last_login)
+
+    def test_rejects_forged_unknown_expired_and_open_redirect(self):
+        TelegramAccount.objects.create(user=self.user, telegram_id=777)
+        forged = {**self.widget(), "id": "778"}  # changed after signing
+        wrong_key = signed({"id": "777", "auth_date": str(int(__import__("time").time()))}, token=TOKEN[:-1] + "X")
+        expired = signed({"id": "777", "auth_date": "1000"})
+        for data in (forged, wrong_key, expired, {"id": "777"}):
+            c = Client()
+            r = c.get(reverse("telegram_login"), data)
+            self.assertEqual(r["Location"], reverse("admin:login"), data)
+            self.assertEqual(c.get(reverse("admin:index")).status_code, 302)  # still anonymous
+        unknown = self.widget(id="999")
+        self.assertEqual(Client().get(reverse("telegram_login"), unknown)["Location"], reverse("admin:login"))
+        r = Client().get(reverse("telegram_login"), {**self.widget(), "next": "https://evil.example/"})
+        self.assertEqual(r["Location"], reverse("admin:index"))
+
+    def test_non_staff_cannot_login(self):
+        u = get_user_model().objects.create_user("visitor", password="x" * 12)
+        TelegramAccount.objects.create(user=u, telegram_id=777)
+        c = Client()
+        c.get(reverse("telegram_login"), self.widget())
+        self.assertEqual(c.get(reverse("admin:index")).status_code, 302)
+
+    def test_link_requires_staff_and_unlink(self):
+        self.assertEqual(Client().get(reverse("telegram_link"), self.widget()).status_code, 403)
+        c = Client()
+        c.force_login(self.user)
+        c.get(reverse("telegram_link"), self.widget())
+        self.assertIn("@kira_tg", c.get(reverse("admin:index")).content.decode())
+        c.post(reverse("telegram_unlink"))
+        self.assertFalse(TelegramAccount.objects.exists())
+
+
+# =============================================================== visit tracking and dashboard
+@override_settings(ALLOWED_HOSTS=["testserver"])
+class AnalyticsTests(MediaTmpMixin, TestCase):
+    UA_IPHONE = ("Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) "
+                 "Version/17.5 Mobile/15E148 Safari/604.1")
+
+    def beacon(self, c=None, ua=UA_IPHONE, **d):
+        c = c or Client()
+        return c.post("/api/track", json.dumps({"v": "visit0001", "u": "person001", **d}), content_type="text/plain",
+                      HTTP_USER_AGENT=ua, HTTP_X_FORWARDED_FOR="203.0.113.7")
+
+    def test_visit_lifecycle(self):
+        self.assertEqual(self.beacon(t="start", url="https://gluckstal.store/?utm_source=vk", ref="", lang="en", scr="390x844").status_code, 204)
+        self.beacon(t="ping", a=15)
+        self.beacon(t="event", e="product_open", a=20)
+        self.beacon(t="event", e="product_open", a=25)
+        self.beacon(t="event", e="evil<script>", a=26)
+        self.beacon(t="end", a=42)
+        v = Visit.objects.get()
+        self.assertEqual((v.ip, v.device_type, v.source, v.lang, v.active_seconds), ("203.0.113.7", "mobile", "vk", "en", 42))
+        self.assertIn("iPhone", v.device)
+        self.assertIn("iOS 17", v.device)
+        self.assertEqual(v.events, {"product_open": 2})
+
+    def test_bots_and_bad_input_ignored(self):
+        self.beacon(t="start", ua="Mozilla/5.0 (compatible; Googlebot/2.1)")
+        self.assertFalse(Visit.objects.exists())
+        self.assertEqual(Client().post("/api/track", "{", content_type="text/plain").status_code, 400)
+        self.assertEqual(Client().post("/api/track", json.dumps({"v": "../x", "u": "y"}), content_type="text/plain").status_code, 400)
+        self.beacon(t="ping", a=10)  # ping for an unknown visit does not create one
+        self.assertFalse(Visit.objects.exists())
+
+    def test_staff_visits_flagged_and_excluded(self):
+        admin_user = get_user_model().objects.create_superuser("owner", password="test-only-password-123")
+        c = Client()
+        c.force_login(admin_user)
+        self.beacon(c=c, t="start", url="https://gluckstal.store/")
+        self.assertTrue(Visit.objects.get().is_staff)
+        from .dashboard import stats
+        self.assertEqual(stats()["today"]["visits"], 0)
+
+    def test_parse_ua(self):
+        from .analytics import parse_ua
+        self.assertEqual(parse_ua("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                                  "Chrome/128.0 YaBrowser/24.7 Safari/537.36"), ("Windows · Yandex Browser", "desktop"))
+        label, kind = parse_ua("Mozilla/5.0 (Linux; Android 14; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/126.0 Mobile Safari/537.36")
+        self.assertEqual(kind, "mobile")
+        self.assertIn("SM-S918B", label)
+        self.assertEqual(parse_ua("curl/8.5"), ("Bot", "bot"))
+
+    @mock.patch("shop.telegram.call", return_value={"ok": True})
+    def test_dashboard_numbers(self, call):
+        self.beacon(t="start", url="https://gluckstal.store/")
+        self.beacon(t="event", e="tg_click", a=30)
+        self.beacon(t="end", a=90)
+        s = SiteSettings.load()
+        s.bot_token, s.chat_ids = TOKEN, "1"
+        s.save()
+        Client().post("/api/order", json.dumps({"name": "Анна", "contact": "@a", "consent": "on", "elapsed": 9000,
+                                                "visit": "visit0001"}), content_type="application/json")
+        from .dashboard import stats
+        d = stats()
+        self.assertEqual((d["today"]["visits"], d["today"]["visitors"], d["today"]["orders"], d["today"]["tg"]), (1, 1, 1, 1))
+        self.assertEqual(d["today"]["avg_time"], "1:30")
+        self.assertEqual(d["today"]["conversion"], "100.0%")
+        self.assertEqual(d["chart"][-1]["visits"], 1)
+        admin_user = get_user_model().objects.create_superuser("owner", password="test-only-password-123")
+        c = Client()
+        c.force_login(admin_user)
+        html = c.get(reverse("admin:index")).content.decode()
+        for text in ("203.0.113.7", "iPhone", "1:30", "Анна"):
+            self.assertIn(text, html, text)
